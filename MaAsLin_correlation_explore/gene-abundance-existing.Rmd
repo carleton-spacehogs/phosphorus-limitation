@@ -1,0 +1,108 @@
+---
+title: "run_MaAsLin2"
+author: "Jimmy Zhong"
+date: "6/19/2022"
+output: html_document
+---
+
+## Libaray set up
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path ))
+source(".init_MaAsLin.R")
+```
+
+## Retrieve metadata and the abundance of pathways per subject
+
+Everything in the metadata should be in our metaphlan read-in.
+*setdiff(rownames(md_patti),colnames(pathabun))* should return nothing.
+manual correction: REPLY008 -> REPLY018, and EAGLE005-1, EAGLE005-2 are assigned by
+the order in collection date.
+
+```{r message=FALSE}
+# function from init_share.R
+BGS_md = init_BGS_metadata() # BGS: Bio-GO-SHIP
+g(nga, nudge_factor) %=% get_geneabundance() #nga: nutrient gene abundance
+
+BGS_md = BGS_md %>% filter(!is.na(phosphate))
+```
+
+# Integrate with CMD and run MaAsLin2
+```{r}
+res_gene = 'MaAsLin2_nutrient_gene_LOG'
+
+# run Maaslin2
+fit_data <- Maaslin2(
+    nga, BGS_md, res_gene, transform = "LOG",
+    fixed_effects = c('phosphate','nitro','temperature'),
+    normalization = 'NONE',
+    standardize = FALSE)
+```
+
+## heatmap focusing on significant pathway by Hypoglycemia
+```{r}
+md_to_graph = md_patti[c("RYGB","BMI","Hypoglycemia")]
+md_to_graph = md_to_graph[order(md_to_graph$Hypoglycemia, md_to_graph$RYGB, md_to_graph$BMI),]
+ppaG = gen_df_for_graphing(ppaN, res_path, "Hypoglycemia")
+gen_heatmap(log10(ppaG), md_to_graph,
+            "./analysis_graph/pathway_heatmap/MaAsLin_sig_Hypoglycemia_log10.png")
+```
+
+## heatmap focusing on significant pathway by RYGB
+```{r}
+md_to_graph = md_to_graph[order(md_to_graph$RYGB, md_to_graph$Hypoglycemia, md_to_graph$BMI),]
+ppaG = gen_df_for_graphing(ppaN, res_path, "RYGB")
+gen_heatmap(log10(ppaG), md_to_graph, 
+            "./analysis_graph/pathway_heatmap/MaAsLin_sig_RYGB_log10.png")
+
+# Smaller heatmap, only select those with normalized p.val, or BH, < 0.05
+extra_sig_path = read_delim(delim = "\t",
+                            file = paste(res_path, "extra_significant_results_RYGB.tsv", sep="/"))
+extra_sig_ppaG = simplify_abundance_df(ppaN)[extra_sig_path$feature, ]
+gen_heatmap(log10(extra_sig_ppaG), md_to_graph, 
+            "./analysis_graph/pathway_heatmap/MaAsLin_sig_BH_lessthan005_RYGB_log10.png")
+```
+
+## heatmap focusing on significant pathway by cholecystectomy (gallbladder removal)
+```{r}
+md_to_graph = md_patti[c("Cholecystectomy","RYGB")]
+md_to_graph = md_to_graph[order(md_to_graph$Cholecystectomy, md_to_graph$RYGB),]
+ppaG = gen_df_for_graphing(ppaN, res_path, "Cholecystectomy")
+gen_heatmap(log10(ppaG), md_to_graph,
+            "./analysis_graph/pathway_heatmap/MaAsLin_sig_Cholecystectomy_log10.png")
+```
+
+
+# Bray-Curtis PCoA with vegan
+```{r}
+all_sign_path <- get_significant_res(res_path, "all")
+ppaP <- simplify_abundance_df(ppaN)[all_sign_path,]
+
+# https://ordnews.colostate.narkive.com/lMWF502c/1593-log-sqrt-and-other-transformation-with-bray-curtis-dissimilarity
+# sqrt() will downplay the role of dominate taxa
+tppaN = t(ppaP)
+#load dataset
+data.bray = vegdist(tppaN)
+#build coordinates
+data.b.pcoa = cmdscale(data.bray, k = (nrow(tppaN) - 1), eig = TRUE)
+#summary
+str(data.b.pcoa)
+#build df from first two coordinates
+pcoa = data.frame(PC1 = data.b.pcoa$points[,1], PC2 = data.b.pcoa$points[,2])
+
+#work-in metadata
+pcoa$Group = md_patti$Group
+pcoa$Age = md_patti$Age
+pcoa$BMI = md_patti$BMI
+pcoa$Sex = md_patti$Sex
+pcoa$Cholecystectomy = md_patti$Cholecystectomy
+
+#viz
+ggplot(pcoa, aes(x = PC1, y = PC2, color = Group)) + 
+  geom_point(size=1.8)
+ggsave("./analysis_graph/pathway_PCA/bivariate_PCoA_pathway.png", 
+       plot = last_plot(),
+       width = 4.5,
+       height = 3)
+```
