@@ -4,60 +4,71 @@ init_env <- function(){
   library(readxl)
   library(readr)
   library(stringr)
-  library(pheatmap)
+  # library(pheatmap) # for drawing heat maps
   library(RColorBrewer)
   library(viridis)
   library(Maaslin2)
-  library(vegan)
+  # library(vegan) # for Principle Coordinate Analysis
   library(ggplot2)
-  library("textclean")
   setwd(dirname(rstudioapi::getActiveDocumentContext()$path ))
   getwd()
 }
 
+gene_abundance_file = "../data/Ustick2021-some-nutrient-genes-coverage-per-sample.csv"
+metadata_file = "../organize_metadata/Bio-GO-SHIP_sample_metadata.csv"
+
+fudge_df = function(df) {
+  fudge_factor <- min(df[df>0])/2
+  new_df = df + fudge_factor
+  new_df = new_df[apply(new_df, 1, var) != 0, ]
+  return(list(new_df, fudge_factor))
+}
+
 # Retrieval and integration of metadata
-init_BGS_metadata <- function(){
+init_BGS_metadata = function(only_phosphate = FALSE){
   init_env()
-  md = read_csv("../organize_metadata/Bio-GO-SHIP_sample_metadata.csv")
-  geneabun = read_csv("../data/Ustick2021-some-nutrient-genes-coverage-per-sample.csv")
-  geneabun_md = geneabun[c("SRA_Accession", "Cruise", "Depth_m_")]
-  
+  md = read_csv(metadata_file)
+  geneabun = read_csv(gene_abundance_file)
+  geneabun_md = geneabun[c("SRA_Accession", "Cruise", "Depth_m", "Month", "Local_Hour")]
   md = merge(md, geneabun_md, by="SRA_Accession")
-  md$log_phosphate = log(md$phosphate)
-  
+
   md = md %>% remove_rownames %>% column_to_rownames(var="SRA_Accession")
+  
+  # round up local hours to hourly, then cut a day into 6 periods
+  md$time_in_day = round(as.numeric(md$Local_Hour))
+  md$time_in_day = cut(md$time_in_day, breaks = c(0, 4, 8, 12, 16, 20, 24),
+                       labels = c("0to4", "4to8", "8to12", "12to16","16to20","20to24"))
+  
+  if (only_phosphate) {
+    md = filter(md, !is.na(phosphate))
+    p_fudge_factor = min(md$phosphate[md$phosphate > 0])/2
+    # n_fudge_factor = min(md$nitro[md$nitro > 0])/2 # too much NAs
+    md$log_phosphate = log10(md$phosphate + p_fudge_factor)
+    # md$log_nitro = log10(md$nitro + n_fudge_factor)
+  }
   return(md)
 }
 
-get_geneabundance = function() {
-  md = init_BGS_metadata()
-  geneabun = read_csv("../data/Bio-Go-nutrient-genes-coverage-per-sample.csv")
-  geneabun2 = geneabun %>% filter(SRA_Accession %in% rownames(md))
-  geneabun2 = geneabun2 %>% remove_rownames %>% column_to_rownames(var="SRA_Accession")
-  
-  geneabun2 = geneabun2[-c(1:12,97:105)]
-  
-  nudge_factor <- min(geneabun2[geneabun2>0])/2
-  geneabunN = geneabun2 + nudge_factor
-  geneabunN = geneabunN[apply(geneabunN, 1, var) != 0, ]
-  return(list(geneabunN, nudge_factor))
-}
+# metadata = init_BGS_metadata()
 
-get_significant_res <- function(res_path, sep_by) {
-  feature_sigs <- read_delim(file = paste(res_path,"significant_results.tsv",sep="/"), delim = "\t")
-  #[1] "X1CMET2.PWY..folate.transformations.III..E..coli..g__Butyrivibrio.s__Butyrivibrio_crossotus"
-  # manually remove the "X" before "X1C..." didn't know where the X came from.
+get_geneabundance = function(metadata, to_fudge = TRUE) {
+  geneabun = read_csv(gene_abundance_file)
+  geneabun = geneabun %>% filter(SRA_Accession %in% rownames(metadata))
+  geneabun = geneabun[-c(2:13,98:106)] # get rid of useless data
+  geneabun = geneabun %>% remove_rownames %>% column_to_rownames(var="SRA_Accession")
   
-  if (sep_by != "all") {
-    feature_sigs_list <- feature_sigs %>%
-      filter(metadata == sep_by) %>%
-      arrange(coef, qval) %>%
-      pull(feature)
+  if (to_fudge) {
+    return(fudge_df(geneabun)) # df + fudge_factor
   } else {
-    feature_sigs_list <- feature_sigs %>%
-      arrange(coef, qval) %>%
-      pull(feature)
+    return(geneabun)
   }
+}
+get_significant_res <- function(res_path, sep_by, strict = 0.25) {
+  feature_sigs <- read_delim(file = paste(res_path,"significant_results.tsv",sep="/"), delim = "\t")
+  
+  if (sep_by[1] != "all") { feature_sigs = filter(feature_sigs, metadata %in% c(sep_by)) }
+  
+  feature_sigs_list = feature_sigs %>% filter(qval < strict) %>% arrange(coef, qval) %>% pull(feature)
   
   feature_sigs_list = gsub("X1CMET2","1CMET2", fixed=TRUE, feature_sigs_list)
   return(feature_sigs_list)
@@ -69,15 +80,16 @@ simplify_abundance_df <- function(abundance_df){
   for (k in c(")","|",":"," ","-",",","&",";","'","+")) {
     simple_rn=gsub(k,".",fixed=TRUE,simple_rn)
   }
-
+  
   abundance_df$new_rowname = simple_rn
   s_abundance_df = abundance_df %>% remove_rownames %>% column_to_rownames(var="new_rowname")
   return(s_abundance_df)
 }
 
-gen_df_for_graphing <- function(abundance_df, res_path, sep_by) {
+gen_df_for_graphing <- function(abundance_df, res_path, sep_by, 
+                                strict = 0.25, return_sorted = FALSE) {
   #import sig features
-  path_sigs_Feats = get_significant_res(res_path, sep_by)
+  path_sigs_Feats = get_significant_res(res_path, sep_by, strict)
   abundance_df = simplify_abundance_df(abundance_df)
   
   msg = "Err (see init_share.R), not all significant features are plotted. Setdiff should return nothing."
@@ -86,17 +98,26 @@ gen_df_for_graphing <- function(abundance_df, res_path, sep_by) {
   #Select features most significantly different between PBH and everyone else
   graph_df = abundance_df %>% filter(rownames(abundance_df) %in% path_sigs_Feats)
   
-  return(graph_df)
+  if (return_sorted) {
+    return(list(path_sigs_Feats, graph_df))
+  } else {
+    return(graph_df) 
+  }
 }
 
-gen_heatmap = function(graph_df, metadata, outpath, g_width = 5, g_height=10) {
+gen_heatmap = function(graph_df, metadata, outpath, g_width = 5, exclude_features = c(),
+                       g_height=10, cluster_row = FALSE, annotation_colors = NA) {
+  
+  graph_df = graph_df[!row.names(graph_df) %in% exclude_features, ]
+  
   #Plot pheatmap
   pheatmap(mat = graph_df[rownames(metadata)],
            annotation_col = metadata,
            cluster_cols = F,
-           cluster_rows = F,
+           cluster_rows = cluster_row,
            show_rownames = T,
            show_colnames = F,
+           annotation_colors = annotation_colors,
            cellwidth = g_width, cellheight = g_height, fontsize = 8, 
            filename = outpath, #"./analysis_graph/MaAsLin_sig_pheatmap_pathway_univar.png"
            scale = "none"
