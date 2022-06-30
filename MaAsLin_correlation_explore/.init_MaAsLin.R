@@ -105,6 +105,16 @@ gen_df_for_graphing <- function(abundance_df, res_path, sep_by,
   }
 }
 
+save_pheatmap_pdf <- function(x, filename, width=7, height=7) {
+  stopifnot(!missing(x))
+  stopifnot(!missing(filename))
+  pdf(filename, width=width, height=height)
+  grid::grid.newpage()
+  grid::grid.draw(x$gtable)
+  dev.off()
+}
+
+
 gen_heatmap = function(graph_df, metadata, outpath, g_width = 5, exclude_features = c(),
                        g_height=10, cluster_row = FALSE, annotation_colors = NA) {
   

@@ -77,7 +77,11 @@ fit_data <- Maaslin2(
 
 # Bray-Curtis PCoA with vegan
 
-PCoA stands for Principal Coordinate Analysis
+PCoA stands for Principal Coordinate Analysis: a sister of Principal
+Componenet Analysis. It is better than PCA when there are more features
+than samples.
+
+**I promise, the PCA plot tutorial is coming!!!**
 
 Use sqrt instead of log to transform, because PCoA does not take
 in negative values in the matrix (computing a negative distance does
@@ -87,7 +91,7 @@ not make sense).
 library(vegan)
 # get_significant_res(): Jimmy's function in .init_MaAsLin.R.
 # strict: set significant level
-all_sign_genes <- get_significant_res(result_dirtory, "Month", strict = 0.05) 
+all_sign_genes <- get_significant_res(result_dirtory, "log_phosphate", strict = 0.05) 
 PCoA_df <- nga[all_sign_genes]
 
 # https://ordnews.colostate.narkive.com/lMWF502c/1593-log-sqrt-and-other-transformation-with-bray-curtis-dissimilarity
@@ -103,9 +107,9 @@ pcoa = data.frame(PC1 = data.b.pcoa$points[,1], PC2 = data.b.pcoa$points[,2])
 pcoa = merge(pcoa, BGS_md, by =0) #work-in metadata
 
 #viz
-ggplot(pcoa, aes(x = PC1, y = PC2, color = Month)) + 
+ggplot(pcoa, aes(x = PC1, y = PC2, color = log_phosphate)) + 
   geom_point(size=1.8)
-ggsave("./manual_analysis_graphs/PCoA_log_month.png", 
+ggsave("./manual_analysis_graphs/PCoA_log_phosphate.png", 
        plot = last_plot(),
        width = 9,
        height = 6)
@@ -117,7 +121,13 @@ ggsave("./manual_analysis_graphs/PCoA_log_month.png",
 Focusing on the concentration of phosphorus in the environment.
 Try to find out which gene is enriched in phosphorus-poor samples.
 
-I used some functions in *.init_MaAsLin.R* to make this process simpler
+I used some functions in *.init_MaAsLin.R* to make this process simpler.
+
+**Warning: phosphate abundance is negatively associated with temperature!!!**
+
+And I don't really know what normalization scheme to make the heat map
+more visible (log will still make some gene overly abundant and ruin the graph).
+I used a weird 6th square of things.
 
 ```{r}
 library(pheatmap)
@@ -132,7 +142,7 @@ nga_g = gen_df_for_graphing(nga, result_dirtory, "log_phosphate")
 sign_genes <- get_significant_res(result_dirtory, "log_phosphate", strict = 0.05) 
 heatmap_df <- as.data.frame(t(nga[sign_genes]))
 
-pheatmap(mat = (heatmap_df[rownames(md_to_graph)])^(1/6),
+g = pheatmap(mat = (heatmap_df[rownames(md_to_graph)])^(1/6),
            annotation_col = md_to_graph,
            cluster_cols = F,
            cluster_rows = F,
@@ -140,34 +150,5 @@ pheatmap(mat = (heatmap_df[rownames(md_to_graph)])^(1/6),
            show_colnames = F,
            scale = "none")
 
-setdiff(rownames(md_to_graph), colnames(heatmap_df))
-
+save_pheatmap_pdf(g, "./manual_analysis_graphs/phosphate_sig_genes_heatmap.pdf", height = 5)
 ```
-
-## heatmap focusing on significant pathway by RYGB
-```{r}
-library(pheatmap)
-md_to_graph = md_to_graph[order(md_to_graph$RYGB, md_to_graph$Hypoglycemia, md_to_graph$BMI),]
-ppaG = gen_df_for_graphing(ppaN, res_path, "RYGB")
-gen_heatmap(log10(ppaG), md_to_graph, 
-            "./analysis_graph/pathway_heatmap/MaAsLin_sig_RYGB_log10.png")
-
-# Smaller heatmap, only select those with normalized p.val, or BH, < 0.05
-extra_sig_path = read_delim(delim = "\t",
-                            file = paste(res_path, "extra_significant_results_RYGB.tsv", sep="/"))
-extra_sig_ppaG = simplify_abundance_df(ppaN)[extra_sig_path$feature, ]
-gen_heatmap(log10(extra_sig_ppaG), md_to_graph, 
-            "./analysis_graph/pathway_heatmap/MaAsLin_sig_BH_lessthan005_RYGB_log10.png")
-```
-
-## heatmap focusing on significant pathway by cholecystectomy (gallbladder removal)
-```{r}
-md_to_graph = md_patti[c("Cholecystectomy","RYGB")]
-md_to_graph = md_to_graph[order(md_to_graph$Cholecystectomy, md_to_graph$RYGB),]
-ppaG = gen_df_for_graphing(ppaN, res_path, "Cholecystectomy")
-gen_heatmap(log10(ppaG), md_to_graph,
-            "./analysis_graph/pathway_heatmap/MaAsLin_sig_Cholecystectomy_log10.png")
-```
-
-
-
