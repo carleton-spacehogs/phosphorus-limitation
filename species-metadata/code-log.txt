@@ -1,0 +1,14 @@
+# for project number
+
+echo $'genome_count\tncbi_bioproject'>tmp
+cat bac120_metadata_r207.tsv ar53_metadata_r207.tsv | awk -F"\t" '{print $49}' | sort | uniq -c >> tmp
+
+sort -r tmp > all-projects.tsv
+rm tmp
+
+grep -v '[[:blank:]]1[[:blank:]]' all-projects.tsv | wc -l
+## more than 1 genome: 1283 projects
+
+grep -v '[[:blank:]][0-9][[:blank:]]' all-projects.tsv
+## more than 10 genomes: 473 projects
+
