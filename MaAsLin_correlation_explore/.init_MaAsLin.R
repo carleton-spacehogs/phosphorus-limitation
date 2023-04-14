@@ -15,7 +15,7 @@ init_env <- function(){
 }
 
 gene_abundance_file = "../data/Ustick2021-some-nutrient-genes-coverage-per-sample.csv"
-metadata_file = "../organize_metadata/Bio-GO-SHIP_sample_metadata.csv"
+metadata_file = "../metadata/Bio-GO-SHIP_sample_metadata.csv"
 
 fudge_df = function(df) {
   fudge_factor <- min(df[df>0])/2
