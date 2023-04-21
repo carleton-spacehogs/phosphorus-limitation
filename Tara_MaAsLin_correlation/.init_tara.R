@@ -10,6 +10,8 @@ init_env <- function(){
   library(Maaslin2)
   # library(vegan) # for Principle Coordinate Analysis
   library(ggplot2)
+  # install.packages("ggVennDiagram")
+  library("ggVennDiagram")
   setwd(dirname(rstudioapi::getActiveDocumentContext()$path ))
   getwd()
 }
@@ -59,6 +61,8 @@ init_tara_metadata = function(){
            log_NO2 = log10(fudge_vec(NO2)),
            log_NO2NO3 = log10(fudge_vec(NO2NO3)),
            log_depth = log10(Mean_Depth),
+           log_FC_heterotrophs = log10(`FC - heterotrophs`),
+           log_FC_bacteria = log10(`FC - bacteria`),
            Mean_Nitrates = ifelse(Mean_Nitrates > 0, Mean_Nitrates, 0),
            log_Nitrates = log10(fudge_vec(Mean_Nitrates))) %>% 
     remove_rownames %>% 
@@ -73,17 +77,25 @@ get_COGabundance = function(to_fudge = TRUE) {
   return(COGabun)
 }
 
-
-get_significant_res <- function(res_path, sep_by, strict = 0.25) {
+get_significant_res = function(res_path, sep_by, strict = 0.05) {
   feature_sigs <- read_delim(file = paste(res_path,"significant_results.tsv",sep="/"), delim = "\t")
   
   if (sep_by[1] != "all") { feature_sigs = filter(feature_sigs, metadata %in% c(sep_by)) }
   
   feature_sigs_list = feature_sigs %>% filter(qval < strict) %>% arrange(coef, qval) %>% pull(feature)
   
-  feature_sigs_list = gsub("X1CMET2","1CMET2", fixed=TRUE, feature_sigs_list)
   return(feature_sigs_list)
 }
+
+resolve_COG_function = function(vec) {
+  COG_dict = read_excel(metadata_file, sheet = 8, col_names = TRUE, col_types = NULL, na = "NA", skip = 0)
+  COG_dict = COG_dict[c('COG', 'Name')] %>% 
+    remove_rownames %>% 
+    column_to_rownames(var='COG')
+  return(COG_dict[vec, ])
+}
+
+
 
 simplify_abundance_df <- function(abundance_df){
   simple_rn=gsub(pattern = "(", replacement = ".", fixed = TRUE, rownames(abundance_df))
