@@ -16,19 +16,22 @@ tara_md = init_tara_metadata()
 COGabun = get_COGabundance() # only the prokaryote fraction
 
 tara_md = tara_md[colnames(COGabun), ]
-tara_md$size_fraction = as.factor(tara_md$size_fraction)
-```
 
-# run MaAsLin2
-```{r}
 # result_dir = 'MaAsLin_out/logPO4_Salinity_Oxygen_Nitrogen_temp_logDepth_size'
 # param = c('size_fraction','Mean_Temperature', "log_depth", 'Mean_Salinity',
 #          'Mean_Oxygen', 'log_PO4', 'log_Nitrates', 'log_NO2', 'log_NO2NO3')
 
-result_dir = 'MaAsLin_out/logPO4_logNO2NO3_Salinity_Oxygen_temp_logDepth_size'
-param = c('size_fraction','Mean_Temperature', "log_depth", 'Mean_Salinity',
-          'Mean_Oxygen', 'log_PO4','log_NO2NO3')
+# result_dir = 'MaAsLin_out/logPO4_logNO2NO3_Salinity_Oxygen_temp_logDepth_size'
+# param = c('size_fraction','Mean_Temperature', "log_depth", 'Mean_Salinity',
+#           'Mean_Oxygen', 'log_PO4','log_NO2NO3')
 
+result_dir = 'MaAsLin_out/logPO4_sqrtIron_logNO2NO3_Salinity_Oxygen_temp_logDepth_size'
+param = c('size_fraction','Mean_Temperature', "log_depth", 'Mean_Salinity',
+           'Mean_Oxygen', 'log_PO4','log_NO2NO3', "sqrt_iron")
+```
+
+# run MaAsLin2
+```{r}
 fit_data <- Maaslin2(
     COGabun, tara_md, result_dir, transform = "LOG",
     fixed_effects = param,
@@ -38,18 +41,13 @@ fit_data <- Maaslin2(
     normalization = 'NONE',
     min_prevalence = 0.33, # at least 1/3 of the sample has it
     standardize = FALSE)
-
-# tmp = COGabun[c("COG0226", "COG0573", "COG0581", "COG4985", "COG1117", "COG3638", "COG3221", "COG3639", "COG3624", "COG3625", "COG3626", "COG3627", "COG4107", "COG4778", "COG3454", "COG3709", "COG2764", "COG0395", "COG1653", "COG1134", "COG1392", "COG1840", "COG0704"), ]
-# tmp$COG_function = c("PstS", "PstC", "PstA", "PstA_auxiliary", "PstB", "PhnC", "PhnD", "PhnE", "PhnG", "PhnH", "PhnI", "PhnJ", "PhnK", "PhnL", "PhnM", "PhnN", "PhnB", "UgpE", "UgpB", "TagH", "YkaA", "AfuA", "PhoU")
-# tmp = tmp[c(ncol(tmp), 2:ncol(tmp)-1)]
-# write.csv(tmp, "phosphorous_COGs_abundance.csv", row.names=TRUE)
 ```
 
 # Screen for simple spearman correlation between phosphate/nitrate concentration and gene abundance
 ```{r}
-return_corr2 = function(x, substrate) {
+return_corr2 = function(x, substrate, mthd = "spearman") {
   y = tara_md %>% pull(substrate)
-  obj = cor.test(x, y, method = "spearman")
+  obj = cor.test(x, y, method = mthd)
   return(c(p.val = obj$p.value, corr = as.numeric(obj$estimate)))
 }
 
@@ -58,18 +56,42 @@ get_high_corr = function( substrate, threshold ) {
   cor = mapply(return_corr2, as.data.frame(t(COGabun[sig_list,])), substrate)
   high_cor = as.data.frame(t(cor)) %>%
     filter(abs(corr) > threshold) %>%
-    arrange(desc(abs(corr)))
-  high_cor$COG_function = resolve_COG_function(rownames(high_cor))
+    arrange(desc(abs(corr))) %>%
+    tibble::rownames_to_column("COG")
+  high_cor$COG_function = resolve_COG_function(high_cor$COG)
   high_cor$substrate = substrate
   print(paste("I have", length(sig_list), "COGs, and", nrow(high_cor), "have correlations greater than", threshold))
   return(high_cor)
 }
 
-high_oxygen_cor = get_high_corr("Mean_Oxygen", threshold = 0.6) # 1640 COGs -> 43 high cor
-high_phosphate_cor = get_high_corr("log_PO4", threshold = 0.6) # 436 COGs -> 76
-high_NO2NO3_cor = get_high_corr("log_NO2NO3", threshold = 0.6) # 549 COGs -> 98
+high_oxygen_cor = get_high_corr("Mean_Oxygen", threshold = 0.6) # with iron: 522 -> 21; no iron: 1640 COGs -> 43 high cor
+high_phosphate_cor = get_high_corr("log_PO4", threshold = 0.6) # with iron: 282 -> 73; no iron: 436 COGs -> 76
+high_NO2NO3_cor = get_high_corr("log_NO2NO3", threshold = 0.6) #with iron: 273 -> 48; no iron: 549 COGs -> 98
+high_iron_cor = get_high_corr("sqrt_iron", threshold = 0.6) # 501 COGs -> 12
 
-all_cor = rbind(high_oxygen_cor, high_phosphate_cor, high_NO2NO3_cor)
+iron_text_COGs=c("COG3470","COG0370","COG0672","COG0735","COG1814","COG1914","COG1918","COG4592","COG1120","COG3842","COG0609","COG0614","COG1178","COG1840","COG4594","COG4772")
+
+iron_text_COGs_corr = high_iron_cor[high_iron_cor$COG %in% iron_text_COGs, ]
+all_cor = rbind(high_NO2NO3_cor, high_oxygen_cor, high_phosphate_cor, high_iron_cor)
+write.csv(all_cor, "high-corr-COGs.csv", row.names=FALSE)
+
+split_dir = function(df) { return(list(df[df$corr >0, ], df[df$corr <0, ])) }
+g(pos_oxygen, neg_oxygen) %=% split_dir(high_oxygen_cor)
+g(pos_phosph, neg_phosph) %=% split_dir(high_phosphate_cor)
+g(pos_iron, neg_iron) %=% split_dir(high_iron_cor)
+g(pos_NO2NO3, neg_NO2NO3) %=% split_dir(high_NO2NO3_cor)
+
+all_dir_sum = t(data.frame(
+  pos_oxygen = paste(pos_oxygen$COG, collapse = " "),
+  neg_oxygen = paste(neg_oxygen$COG, collapse = " "),
+  pos_phosphate = paste(pos_phosph$COG, collapse = " "),
+  neg_phosphate = paste(neg_phosph$COG, collapse = " "),
+  pos_iron = paste(pos_iron$COG, collapse = " "),
+  neg_iron = paste(neg_iron$COG, collapse = " "),
+  pos_NO2NO3 = paste(pos_NO2NO3$COG, collapse = " "),
+  neg_NO2NO3 = paste(neg_NO2NO3$COG, collapse = " ")
+))
+write.csv(all_dir_sum, "pos_neg_separated_COGs.csv", row.names=TRUE)
 ```
 
 # looking at metadata only
@@ -85,26 +107,40 @@ cor.test(tara_md$Mean_Oxygen, tara_md$PO4, method = "spearman")
 cor.test(tara_md$OG.Shannon, tara_md$PO4, method = "spearman")
 cor.test(tara_md$OG.Shannon, tara_md$Mean_Oxygen, method = "spearman")
 
+tmp = tara_md[!is.na(tara_md$NO2),]
+tmp = tmp[!is.na(tmp$NO2NO3), ]
+tmp$t = tmp$NO2NO3 - tmp$NO2
+tmp$`NO2NO3-NO2` = ifelse(tmp$t < 0, 0, tmp$t)
+
+plot(log(NO2 + 0.001)~log(`NO2NO3-NO2` + 0.001), tmp)
+
+
 plot(NO2NO3~PO4, tara_md)
 plot(Mean_Oxygen~PO4, tara_md)
+plot(log_PO4~log_depth, tara_md)
+boxplot(log_PO4~layer, tara_md)
 ```
 
 # Overlaps between these cOGs
 ```{r}
+four_gray = rep("gray", 4)
+
 all_sig_COGs_df = list(oxygen = get_significant_res(result_dir, "Mean_Oxygen"),
                     NO2NO3 = get_significant_res(result_dir, "log_NO2NO3"),
-                    phosphate = get_significant_res(result_dir, "log_PO4"))
+                    phosphate = get_significant_res(result_dir, "log_PO4"),
+                    iron = get_significant_res(result_dir, "sqrt_iron"))
 ggVennDiagram(all_sig_COGs_df) + 
-  scale_color_manual(values = c("gray","gray","gray")) +
+  scale_color_manual(values = four_gray) +
   scale_fill_gradient(low = "#F4FAFE", high = "#4981BF")
 
-ggsave("./graphs/VennDiagram_all_COGs.jpg", width = 6, height = 5)
+ggsave("./graphs/VennDiagram_all_COGs_iron.jpg", width = 6, height = 5)
 
 high_cor_COGs_df = list(oxygen = rownames(high_oxygen_cor),
                         NO2NO3 = rownames(high_NO2NO3_cor),
-                        phosphate = rownames(high_phosphate_cor))
+                        phosphate = rownames(high_phosphate_cor),
+                        iron = rownames(high_iron_cor))
 ggVennDiagram(high_cor_COGs_df) + 
-  scale_color_manual(values = c("gray","gray","gray")) +
+  scale_color_manual(values = four_gray) +
   scale_fill_gradient(low = "#F4FAFE", high = "#4981BF")
 
 # the two intersects:
@@ -129,7 +165,7 @@ not make sense).
 
 ```{r}
 library(vegan)
-all_sig_COGs = unique(rownames(all_cor))
+all_sig_COGs = unique(all_cor$COG)
 write(all_sig_COGs, file = "high-corr-COGs.txt")
 COGabun_sig = COGabun[all_sig_COGs, ]
 
@@ -169,6 +205,7 @@ gen_save_PCoA = function(substrate) {
 gen_save_PCoA("log_NO2NO3")
 gen_save_PCoA("log_PO4")
 gen_save_PCoA("Mean_Oxygen")
+gen_save_PCoA("sqrt_iron")
 ```
 
 # distances between groups of COGs
@@ -246,42 +283,4 @@ high_phosphate_cor = process_corr(phosphate_cor, 0.6) # corr > 0.6: 66 rows
 
 NO2NO3_cor = mapply(return_corr2, as.data.frame(t(COGabun[sig_NO2NO3,])), "NO2NO3")
 high_NO2NO3_cor = process_corr(NO2NO3_cor, 0.6) # corr > 0.6: 12 rows
-```
-
-
-## heatmap!
-
-Focusing on the concentration of phosphorus in the environment.
-Try to find out which gene is enriched in phosphorus-poor samples.
-
-I used some functions in *.init_MaAsLin.R* to make this process simpler.
-
-**Warning: phosphate abundance is negatively associated with temperature!!!**
-
-And I don't really know what normalization scheme to make the heat map
-more visible (log will still make some gene overly abundant and ruin the graph).
-I used a weird 6th square of things.
-
-```{r}
-library(pheatmap)
-
-plot(log_phosphate~temperature, BGS_md)
-summary(lm(log_phosphate~temperature, BGS_md))
-
-md_to_graph = BGS_md[c("log_phosphate","temperature")]
-md_to_graph = md_to_graph[order(md_to_graph$log_phosphate, md_to_graph$temperature),]
-nga_g = gen_df_for_graphing(nga, result_dirtory, "log_phosphate")
-
-sign_genes <- get_significant_res(result_dirtory, "log_phosphate", strict = 0.05) 
-heatmap_df <- as.data.frame(t(nga[sign_genes]))
-
-g = pheatmap(mat = (heatmap_df[rownames(md_to_graph)])^(1/6),
-           annotation_col = md_to_graph,
-           cluster_cols = F,
-           cluster_rows = F,
-           show_rownames = T,
-           show_colnames = F,
-           scale = "none")
-
-save_pheatmap_pdf(g, "./manual_analysis_graphs/phosphate_sig_genes_heatmap.pdf", height = 5)
 ```

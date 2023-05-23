@@ -16,6 +16,9 @@ init_env <- function(){
   getwd()
 }
 
+#from: Community-Level Responses to Iron Availability in Open Ocean Plankton Ecosystems
+iron_f="../metadata/Tara-iron_gbc20832-sup-0009-table_s01_downloaded-April-30-2023.xlsx"
+
 gene_abundance_file = "../data/Tara_139_COGonly.tsv" # download April 12th 2023
 metadata_file = "../metadata/OM.CompanionTables-downloaded-April11-2022.xlsx"
 
@@ -51,25 +54,45 @@ init_tara_metadata = function(){
   colnames(md) = sapply(colnames(md), remove_special_chars)
   
   md2 = merge(linker, md, by = "PANGAEA Sample ID")
-  md2$sample = str_replace(md2$sample, "<", "0.0")
   
-  md2$size_fraction = str_extract(md2$sample, "\\d+\\.\\d+-\\d+\\.?\\d*") # capture two numbers separated by a hyphen
-  
-  # How can Mean_Nitrates be negative??? Change it all to 0
-  md2 = md2 %>% 
-    mutate(log_PO4 = log10(fudge_vec(PO4)),
+  md2$tmp = gsub("TARA_", "", md2$sample)
+  md2$tmp = gsub("^0+", "", md2$tmp)
+
+  md2 = md2 %>%
+    separate(tmp, into = c("station", "layer", "size_fraction"), sep = "_") %>%
+    mutate(size_fraction = str_replace(size_fraction, "<", "0.0"),
+           log_PO4 = log10(fudge_vec(PO4)),
            log_NO2 = log10(fudge_vec(NO2)),
            log_NO2NO3 = log10(fudge_vec(NO2NO3)),
            log_depth = log10(Mean_Depth),
            log_FC_heterotrophs = log10(`FC - heterotrophs`),
            log_FC_bacteria = log10(`FC - bacteria`),
            Mean_Nitrates = ifelse(Mean_Nitrates > 0, Mean_Nitrates, 0),
-           log_Nitrates = log10(fudge_vec(Mean_Nitrates))) %>% 
+           log_Nitrates = log10(fudge_vec(Mean_Nitrates))) 
+  
+  iron = get_iron_concentration()
+  md3 = merge(iron, md2, by = c("station", "layer"), all.y = TRUE)  
+  
+  md3 = md3 %>%
+    mutate(sqrt_iron = sqrt(PISCES2),
+           size_fraction = as.factor(size_fraction),
+           layer = factor(layer, levels=c('MIX', 'MES', 'DCM', 'SRF'))) %>%
     remove_rownames %>% 
     column_to_rownames(var="sample")
   
-  return(md2)
+  return(md3)
 }
+
+get_iron_concentration = function() {
+  Tara_iron=read_excel(iron_f, skip = 4, na = "NA",
+                       col_names = c("station", "layer", "PISCES2", "ECCO2-DARWIN",
+                      "Mean_Lat", "Mean_Long", "observed_iron", "Resolution"))
+  Tara_iron$layer = gsub("SUR", "SRF", Tara_iron$layer)
+  # most of the ECCO2-DARWIN were NA for the Tara samples we have
+  
+  return(Tara_iron[c("station", "layer", "PISCES2", "ECCO2-DARWIN", "observed_iron", "Resolution")])
+}
+
 
 get_COGabundance = function(to_fudge = TRUE) {
   COGabun = read.csv(gene_abundance_file, sep = "\t")
@@ -78,12 +101,12 @@ get_COGabundance = function(to_fudge = TRUE) {
 }
 
 get_significant_res = function(res_path, sep_by, strict = 0.05) {
-  feature_sigs <- read_delim(file = paste(res_path,"significant_results.tsv",sep="/"), delim = "\t")
+  res = paste(res_path,"significant_results.tsv",sep="/")
+  feature_sigs = read_delim(file=res, delim = "\t", col_types = cols())
   
   if (sep_by[1] != "all") { feature_sigs = filter(feature_sigs, metadata %in% c(sep_by)) }
   
   feature_sigs_list = feature_sigs %>% filter(qval < strict) %>% arrange(coef, qval) %>% pull(feature)
-  
   return(feature_sigs_list)
 }
 

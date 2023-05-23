@@ -1,0 +1,135 @@
+2023-05-07 09:14:41 INFO::Writing function arguments to log file
+2023-05-07 09:14:41 DEBUG::Function arguments
+2023-05-07 09:14:41 DEBUG::Output folder: MaAsLin_out/joanne_iron_logPO4_logNO2NO3_Salinity_Oxygen_temp_logDepth_size_long_lat
+2023-05-07 09:14:41 DEBUG::Min Abundance: 0.000000
+2023-05-07 09:14:41 DEBUG::Min Prevalence: 0.330000
+2023-05-07 09:14:41 DEBUG::Normalization: NONE
+2023-05-07 09:14:41 DEBUG::Transform: LOG
+2023-05-07 09:14:41 DEBUG::Analysis method: LM
+2023-05-07 09:14:41 DEBUG::Max significance: 0.050000
+2023-05-07 09:14:41 DEBUG::Random effects: Mean_Lat,Mean_Long
+2023-05-07 09:14:41 DEBUG::Fixed effects: size_fraction,Mean_Temperature,log_depth,Mean_Salinity,Mean_Oxygen,log_PO4,log_NO2NO3,sqrt_iron
+2023-05-07 09:14:41 DEBUG::Correction method: BH
+2023-05-07 09:14:41 DEBUG::Standardize: FALSE
+2023-05-07 09:14:41 DEBUG::Cores: 1
+2023-05-07 09:14:41 INFO::Verifying options selected are valid
+2023-05-07 09:14:41 INFO::Determining format of input files
+2023-05-07 09:14:41 INFO::Input format is data samples as columns and metadata samples as rows
+2023-05-07 09:14:41 DEBUG::Transformed data so samples are rows
+2023-05-07 09:14:41 DEBUG::A total of 139 samples were found in both the data and metadata
+2023-05-07 09:14:41 DEBUG::Reordering data/metadata to use same sample ordering
+2023-05-07 09:14:41 INFO::Formula for random effects: expr ~ (1 | Mean_Lat) + (1 | Mean_Long)
+2023-05-07 09:14:41 INFO::Formula for fixed effects: expr ~  size_fraction + Mean_Temperature + log_depth + Mean_Salinity + Mean_Oxygen + log_PO4 + log_NO2NO3 + sqrt_iron
+2023-05-07 09:14:41 INFO::Filter data based on min abundance and min prevalence
+2023-05-07 09:14:41 INFO::Total samples in data: 139
+2023-05-07 09:14:41 INFO::Min samples required with min abundance for a feature not to be filtered: 45.870000
+2023-05-07 09:14:41 INFO::Total filtered features: 0
+2023-05-07 09:14:41 INFO::Filtered feature names from abundance and prevalence filtering:
+2023-05-07 09:14:41 INFO::Total filtered features with variance filtering: 0
+2023-05-07 09:14:41 INFO::Filtered feature names from variance filtering:
+2023-05-07 09:14:41 INFO::Running selected normalization method: NONE
+2023-05-07 09:14:41 INFO::Bypass z-score application to metadata
+2023-05-07 09:14:41 INFO::Running selected transform method: LOG
+2023-05-07 09:14:41 INFO::Running selected analysis method: LM
+2023-05-07 09:14:41 INFO::Fitting model to feature number 1, COG0226
+2023-05-07 09:14:41 INFO::Fitting model to feature number 2, COG0573
+2023-05-07 09:14:41 INFO::Fitting model to feature number 3, COG0581
+2023-05-07 09:14:41 INFO::Fitting model to feature number 4, COG4985
+2023-05-07 09:14:41 INFO::Fitting model to feature number 5, COG1117
+2023-05-07 09:14:42 INFO::Fitting model to feature number 6, COG3638
+2023-05-07 09:14:42 INFO::Fitting model to feature number 7, COG3221
+2023-05-07 09:14:42 INFO::Fitting model to feature number 8, COG3639
+2023-05-07 09:14:42 INFO::Fitting model to feature number 9, COG3624
+2023-05-07 09:14:42 INFO::Fitting model to feature number 10, COG3625
+2023-05-07 09:14:42 INFO::Fitting model to feature number 11, COG3626
+2023-05-07 09:14:42 INFO::Fitting model to feature number 12, COG3627
+2023-05-07 09:14:42 INFO::Fitting model to feature number 13, COG4107
+2023-05-07 09:14:42 INFO::Fitting model to feature number 14, COG4778
+2023-05-07 09:14:43 INFO::Fitting model to feature number 15, COG3454
+2023-05-07 09:14:43 INFO::Fitting model to feature number 16, COG3709
+2023-05-07 09:14:43 INFO::Fitting model to feature number 17, COG2764
+2023-05-07 09:14:43 INFO::Fitting model to feature number 18, COG0395
+2023-05-07 09:14:43 INFO::Fitting model to feature number 19, COG1653
+2023-05-07 09:14:43 INFO::Fitting model to feature number 20, COG1134
+2023-05-07 09:14:43 INFO::Fitting model to feature number 21, COG1392
+2023-05-07 09:14:43 INFO::Fitting model to feature number 22, COG1840
+2023-05-07 09:14:43 INFO::Fitting model to feature number 23, COG0704
+2023-05-07 09:14:43 INFO::Counting total values for each feature
+2023-05-07 09:14:44 INFO::Writing residuals to file MaAsLin_out/joanne_iron_logPO4_logNO2NO3_Salinity_Oxygen_temp_logDepth_size_long_lat/residuals.rds
+2023-05-07 09:14:44 INFO::Writing fitted values to file MaAsLin_out/joanne_iron_logPO4_logNO2NO3_Salinity_Oxygen_temp_logDepth_size_long_lat/fitted.rds
+2023-05-07 09:14:44 INFO::Writing extracted random effects to file MaAsLin_out/joanne_iron_logPO4_logNO2NO3_Salinity_Oxygen_temp_logDepth_size_long_lat/ranef.rds
+2023-05-07 09:14:44 INFO::Writing all results to file (ordered by increasing q-values): MaAsLin_out/joanne_iron_logPO4_logNO2NO3_Salinity_Oxygen_temp_logDepth_size_long_lat/all_results.tsv
+2023-05-07 09:14:44 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.050000 ) to file (ordered by increasing q-values): MaAsLin_out/joanne_iron_logPO4_logNO2NO3_Salinity_Oxygen_temp_logDepth_size_long_lat/significant_results.tsv
+2023-05-07 09:14:44 INFO::Writing heatmap of significant results to file: MaAsLin_out/joanne_iron_logPO4_logNO2NO3_Salinity_Oxygen_temp_logDepth_size_long_lat/heatmap.pdf
+2023-05-07 09:14:44 INFO::Writing association plots (one for each significant association) to output folder: MaAsLin_out/joanne_iron_logPO4_logNO2NO3_Salinity_Oxygen_temp_logDepth_size_long_lat
+2023-05-07 09:14:44 INFO::Plotting associations from most to least significant, grouped by metadata
+2023-05-07 09:14:44 INFO::Plotting data for metadata number 1, log_PO4
+2023-05-07 09:14:44 INFO::Creating scatter plot for continuous data, log_PO4 vs COG0226
+2023-05-07 09:14:44 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:44 INFO::Creating scatter plot for continuous data, log_PO4 vs COG0573
+2023-05-07 09:14:44 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:44 INFO::Creating scatter plot for continuous data, log_PO4 vs COG0581
+2023-05-07 09:14:44 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:44 INFO::Creating scatter plot for continuous data, log_PO4 vs COG1117
+2023-05-07 09:14:44 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:44 INFO::Creating scatter plot for continuous data, log_PO4 vs COG0704
+2023-05-07 09:14:44 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:44 INFO::Creating scatter plot for continuous data, log_PO4 vs COG3624
+2023-05-07 09:14:45 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:45 INFO::Creating scatter plot for continuous data, log_PO4 vs COG3625
+2023-05-07 09:14:45 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:45 INFO::Creating scatter plot for continuous data, log_PO4 vs COG4107
+2023-05-07 09:14:45 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:45 INFO::Creating scatter plot for continuous data, log_PO4 vs COG3627
+2023-05-07 09:14:45 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:45 INFO::Creating scatter plot for continuous data, log_PO4 vs COG4778
+2023-05-07 09:14:45 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:45 INFO::Creating scatter plot for continuous data, log_PO4 vs COG3626
+2023-05-07 09:14:45 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:45 INFO::Creating scatter plot for continuous data, log_PO4 vs COG1392
+2023-05-07 09:14:45 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:45 INFO::Creating scatter plot for continuous data, log_PO4 vs COG3709
+2023-05-07 09:14:45 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:45 INFO::Creating scatter plot for continuous data, log_PO4 vs COG3454
+2023-05-07 09:14:46 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:46 INFO::Creating scatter plot for continuous data, log_PO4 vs COG3639
+2023-05-07 09:14:46 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:46 INFO::Creating scatter plot for continuous data, log_PO4 vs COG3638
+2023-05-07 09:14:46 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:46 INFO::Creating scatter plot for continuous data, log_PO4 vs COG3221
+2023-05-07 09:14:46 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:49 INFO::Plotting data for metadata number 2, log_depth
+2023-05-07 09:14:49 INFO::Creating scatter plot for continuous data, log_depth vs COG1134
+2023-05-07 09:14:49 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:50 INFO::Plotting data for metadata number 3, Mean_Temperature
+2023-05-07 09:14:50 INFO::Creating scatter plot for continuous data, Mean_Temperature vs COG1840
+2023-05-07 09:14:50 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:50 INFO::Creating scatter plot for continuous data, Mean_Temperature vs COG0581
+2023-05-07 09:14:50 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:50 INFO::Creating scatter plot for continuous data, Mean_Temperature vs COG0226
+2023-05-07 09:14:50 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:50 INFO::Creating scatter plot for continuous data, Mean_Temperature vs COG0573
+2023-05-07 09:14:50 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:51 INFO::Plotting data for metadata number 4, Mean_Oxygen
+2023-05-07 09:14:51 INFO::Creating scatter plot for continuous data, Mean_Oxygen vs COG1134
+2023-05-07 09:14:51 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:51 INFO::Creating scatter plot for continuous data, Mean_Oxygen vs COG3639
+2023-05-07 09:14:51 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:51 INFO::Creating scatter plot for continuous data, Mean_Oxygen vs COG1840
+2023-05-07 09:14:51 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:52 INFO::Plotting data for metadata number 5, log_NO2NO3
+2023-05-07 09:14:52 INFO::Creating scatter plot for continuous data, log_NO2NO3 vs COG3639
+2023-05-07 09:14:53 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:53 INFO::Plotting data for metadata number 6, Mean_Salinity
+2023-05-07 09:14:53 INFO::Creating scatter plot for continuous data, Mean_Salinity vs COG0704
+2023-05-07 09:14:53 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:53 INFO::Creating scatter plot for continuous data, Mean_Salinity vs COG0226
+2023-05-07 09:14:54 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:55 INFO::Plotting data for metadata number 7, sqrt_iron
+2023-05-07 09:14:55 INFO::Creating scatter plot for continuous data, sqrt_iron vs COG0704
+2023-05-07 09:14:55 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:55 INFO::Creating scatter plot for continuous data, sqrt_iron vs COG1840
+2023-05-07 09:14:56 DEBUG::`geom_smooth()` using formula 'y ~ x'
+2023-05-07 09:14:57 INFO::Plotting data for metadata number 8, size_fraction
+2023-05-07 09:14:57 INFO::Creating boxplot for categorical data, size_fraction vs COG2764
+2023-05-07 09:14:57 INFO::Creating boxplot for categorical data, size_fraction vs COG3638
