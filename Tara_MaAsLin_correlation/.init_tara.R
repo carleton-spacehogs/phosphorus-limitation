@@ -12,8 +12,8 @@ init_env <- function(){
   library(ggplot2)
   # install.packages("ggVennDiagram")
   library("ggVennDiagram")
-  setwd(dirname(rstudioapi::getActiveDocumentContext()$path ))
-  getwd()
+  #setwd(dirname(rstudioapi::getActiveDocumentContext()$path )) # Commented out by Troy bc I'm not using RStudio
+  #getwd() # Commented out by Troy bc I'm not using RStudio
 }
 
 #from: Community-Level Responses to Iron Availability in Open Ocean Plankton Ecosystems
