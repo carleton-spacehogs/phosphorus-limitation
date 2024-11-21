@@ -80,6 +80,8 @@ init_tara_metadata = function(){
     remove_rownames %>% 
     column_to_rownames(var="sample")
   
+  md3$Absolute_Latitude <- abs(md3$Mean_Lat)
+  
   return(md3)
 }
 
