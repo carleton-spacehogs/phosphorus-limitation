@@ -1,0 +1,350 @@
+---
+title: "Troy's Graphs"
+output:
+  html_document: default
+---
+
+```{r global options, include = F}
+generate_strongest_nitraite_model_significance_COGs_graphs = FALSE
+generate_strongest_raw_nitraite_correlation_COGs_graphs = FALSE
+generate_strongest_nitraite_exponential_model_COGs_graphs = FALSE
+generate_graphs_for_nitrogen_COGs_only = FALSE
+generate_opposite_direction_no2_no3_graphs = TRUE
+num_graphs = 25
+```
+
+
+```{r setup, include=FALSE}
+# Author: Troy Osborn
+# Date: Feb-Apr 2025
+
+# generating various sets of graphs for Rika and Joanne, after they requested
+# some graphs over Slack in late February for a different project they're 
+# working on. The different sections of this doc correspond to different requests
+
+# libraries and data loading
+suppressMessages(library(tidyverse))
+
+source(".init_tara.R")
+tara_md = init_tara_metadata()
+COGabun = get_COGabundance()
+
+tara_md = tara_md[colnames(COGabun), ]
+
+results <- read_tsv("MaAsLin_out/cplm-logCOGabun_against_no.ranefs_AbsLat_logPO4_sqrtIron_logNO2NO3_Salinity_Oxygen_temp_logDepth_size/all_results.tsv")
+
+# chunk options
+knitr::opts_chunk$set(include = F, 
+                      message = F, warning = F, 
+                      fig.height = 4, fig.width = 6, fig.align = "center")
+
+if(generate_opposite_direction_no2_no3_graphs == T) {
+  knitr::opts_chunk$set(fig.width = 8)
+}
+```
+
+```{r request 1}
+# generating graphs for Rika and Joanne, requested 2/27/25
+# takes the COGs with the strongest correlation with nitrogen 
+# ACCORDING TO THE MOST UP-TO-DATE MODEL (NOT RAW) and
+# outputs graphs of those COG abundances against nitrate/nitrite concentration
+# pretty similar to:
+# https://github.com/carleton-spacehogs/phosphorus-limitation/blob/main/Tara_MaAsLin_correlation/MaAsLin_out/cplm-logCOGabun_against_no.ranefs_AbsLat_logPO4_sqrtIron_logNO2NO3_Salinity_Oxygen_temp_logDepth_size/log_NO2NO3.pdf
+
+# strongest.Nitrogen.COGs <- results |> 
+#   filter(metadata == "log_NO2NO3") |> 
+#   slice_max(abs(coef), n = num_graphs) |> 
+#   pull(feature)
+# ^ takes the strongest coefficients, probably better to take smallest q-val
+
+strongest.Nitrogen.COGs <- results |> 
+  filter(metadata == "log_NO2NO3") |> 
+  slice_min(qval, n = num_graphs) |> 
+  pull(feature)
+
+abunds <- COGabun[strongest.Nitrogen.COGs, ] 
+
+namevec <- names(abunds)
+
+tbl <- abunds |> 
+  t() |> 
+  as_tibble()
+
+tbl$measurement <- namevec
+
+temp <- tara_md |> 
+  rownames_to_column(var = "measurement") |> 
+  select(measurement, log_NO2NO3)
+
+tbl <- left_join(tbl, temp, by = "measurement")
+
+```
+
+```{r request 1 graphs, include = T, echo = F}
+if (generate_strongest_nitraite_model_significance_COGs_graphs == TRUE) {
+  for (i in 1:length(strongest.Nitrogen.COGs)) {
+    current_COG <- strongest.Nitrogen.COGs[i]
+  
+    p <- ggplot(tbl, aes(x = log_NO2NO3, y = .data[[current_COG]])) +
+      geom_point() +
+      geom_smooth(method = "loess", se = F) +
+      labs(title = current_COG) +
+      theme_light()
+    print(p)
+  }
+}
+```
+
+```{r exploratory graphing}
+# looking at exponential relationships
+# ggplot(tbl, aes(x = log_NO2NO3, y = .data[[current_COG]])) +
+#     geom_point() +
+#     geom_smooth(method = "lm", se = F) +
+#     theme_light()
+# 
+# ggplot(tbl, aes(x = log_NO2NO3, y = log(.data[[current_COG]] + 0.001))) +
+#     geom_point() +
+#     geom_smooth(method = "lm", se = F) +
+#     theme_light()
+
+```
+
+
+```{r request 2}
+# graph just the strongest raw Spearman correlations
+# request for this made over Slack 2/28/25
+
+# create a dataframe with all abundances at all locations in long format
+COGabun_long <- COGabun |> 
+  rownames_to_column(var = "COG") |> 
+  pivot_longer(cols = starts_with("TARA"), 
+               names_to = "measurement",
+               values_to = "abundance")
+
+# create two-column dataframe of stations/measurements and their log_NO2NO3 measurements
+all_logNO2NO3 <- tara_md |> 
+  rownames_to_column(var = "measurement") |> 
+  select(measurement, log_NO2NO3) |> 
+  drop_na()
+
+sum(!(all_logNO2NO3$measurement %in% COGabun_long$measurement))
+
+# make a table of nitraite levels and COG abundances
+nitraite_table <- COGabun_long |> 
+  left_join(all_logNO2NO3, by = "measurement") |> 
+  drop_na()
+
+# compute correlations and grab the highest ones
+strongest.correlation.COGs <- nitraite_table |> 
+  group_by(COG) |> 
+  summarize(cor = cor(abundance, log_NO2NO3, method = "spearman")) |> 
+  mutate(abs.cor = abs(cor)) |> 
+  slice_max(abs.cor, n = num_graphs) # some NA's due to abundances of 0
+
+# graph them, with titles concatenating COG name and its correlation
+```
+
+```{r request 2 graphs, include = T, echo = F}
+if (generate_strongest_raw_nitraite_correlation_COGs_graphs == TRUE) {
+  for (i in 1:nrow(strongest.correlation.COGs)) {
+    current_COG <- strongest.correlation.COGs$COG[i]
+  
+    p <- ggplot(nitraite_table |> filter(COG == current_COG),
+                aes(x = log_NO2NO3, y = abundance)) +
+      geom_point() +
+      geom_smooth(method = "loess", se = F) +
+      labs(title = current_COG,
+           subtitle = str_c("Correlation: ", round(strongest.correlation.COGs$cor[i], 3)),
+           y = "Abundance") +
+      theme_light()
+    print(p)
+  }
+}
+```
+
+```{r request 3}
+# graph the COGs which have the strongest *exponential* relationship with log_NO2NO3
+# request made 2/28
+# to do this, I did a Maaslin run where linear models of just 
+# log(abundance) ~ log_NO2NO3 (see jo_maaslin_out/exponential_with_transformation)
+# this had the same result of doing the lm by hand (see jo_nitrogen_maaslin.R)
+# but output graphs on the original response scale, so here I'll run the lm's myself
+# and make the right graphs
+
+nitrogen_master_table <- COGabun_long |> 
+  left_join(all_logNO2NO3, by = "measurement") |> 
+  mutate(logabun = log(abundance)) |> 
+  filter(!is.infinite(logabun)) |> # filter out logs of -Inf (abundance = 0)
+  filter(!(COG %in% c("COG4211", "COG4811")))
+
+# filter out all the COGs below the minimum prevalence
+min.prevalence <- 0.1
+cogs.to.filter <- nitrogen_master_table |> 
+  group_by(COG) |> 
+  summarize(n = n()) |> 
+  filter(n <= min.prevalence*139) |> # there's 139 total samples 
+  pull(COG)
+
+# run the lm's and extract the coefficients
+nitrogen_exp_coefficients <- nitrogen_master_table |> 
+  group_by(COG) |> 
+  filter(!(COG %in% cogs.to.filter)) |> 
+  summarize(intercept = lm(logabun ~ log_NO2NO3)$coefficients[1],
+                slope = lm(logabun ~ log_NO2NO3)$coefficients[2],
+            slope_pval= summary(lm(logabun ~ log_NO2NO3))$coefficients[2, 4]) |> 
+  arrange(slope_pval)
+
+
+# exponential curve function for graphing
+my_exponential_curve <- 
+    function(x, cur_COG = current_COG, coef_table = nitrogen_exp_coefficients) {
+      coefs <- coef_table |> filter(COG == cur_COG)
+      int <- coefs[[1, 2]]
+      slope <- coefs[[1, 3]]
+      return(exp(int)*exp(x * slope))
+    }
+```
+
+```{r request 3 graphs, include = T, echo = F}
+if (generate_strongest_nitraite_exponential_model_COGs_graphs == TRUE) {
+  for (i in 1:num_graphs) {
+    current_COG <- nitrogen_exp_coefficients[i, "COG"] |> as.character()
+    current_table <- nitrogen_master_table |> filter(COG == current_COG)
+    
+    p <- ggplot() +
+      geom_point(data = current_table, mapping = aes(y = abundance, x = log_NO2NO3)) +
+      geom_function(fun = my_exponential_curve, color = "blue",
+          args = list(cur_COG = current_COG, coef_table = nitrogen_exp_coefficients)) +
+      labs(title = current_COG, y = "Abundance") +
+      theme_light()
+    print(p)
+  }
+}
+
+# graph a sanity check
+# ggplot(data = nitrogen_master_table |> filter(COG == "COG5598"),
+#        aes(x = log_NO2NO3, y = abundance)) +
+#   geom_point() +
+#   geom_smooth(method = "loess", se = F, color = "gray") +
+#   geom_function(fun = \(x) exp(-8.3065) * exp(x*0.3661))
+
+# note from after: I maybe could have used 
+# geom_smooth(method = "lm", formula = log(y) ~ x)
+# but would have had to figure out how to restore coefficients to correct scale
+```
+
+```{r request 4}
+# redo both the linear and exponential models, but only on a list of COGs
+# Joanne identified to have functions related to nitrogen
+# requested April 4
+
+jos.cogs <- read_tsv("NitrogenCOGs.txt", col_names = F) |> pull(X1)
+
+nitrogen_exp_coefficients <- nitrogen_master_table |> 
+  filter(COG %in% jos.cogs) |> 
+  group_by(COG) |> 
+  filter(!(COG %in% cogs.to.filter)) |> 
+  summarize(intercept = lm(logabun ~ log_NO2NO3)$coefficients[1],
+                slope = lm(logabun ~ log_NO2NO3)$coefficients[2],
+            slope_pval= summary(lm(logabun ~ log_NO2NO3))$coefficients[2, 4],
+                  rsq = summary(lm(logabun ~ log_NO2NO3))$r.squared) |> 
+  arrange(desc(rsq))
+
+# cbind(pull(slice_max(nitrogen_exp_coefficients, rsq, n = 10), COG),
+#       pull(slice_min(nitrogen_exp_coefficients, slope_pval, n = 10), COG))
+# yeah, sorting by pvalue and r.squared do pretty much the same thing
+
+```
+
+```{r request 4 graphs, include = T, echo = F}
+# code copied from request 3 graphing chunk
+if (generate_graphs_for_nitrogen_COGs_only == TRUE) {
+  for (i in 1:nrow(nitrogen_exp_coefficients)) {
+    current_COG <- nitrogen_exp_coefficients[i, "COG"] |> as.character()
+    current_table <- nitrogen_master_table |> filter(COG == current_COG)
+    
+    p <- ggplot() +
+      geom_point(data = current_table, mapping = aes(y = abundance, x = log_NO2NO3)) +
+      geom_function(fun = my_exponential_curve, color = "blue",
+          args = list(cur_COG = current_COG, coef_table = nitrogen_exp_coefficients)) +
+      labs(title = current_COG, y = "Abundance") +
+      theme_light()
+    print(p)
+  }
+}
+```
+
+```{r request 5}
+# look for nitrogen-related COGs with opposite-sign relationships with NO2 and 
+# NO3. Impute NO3 values by subtracting NO2 from NO2NO3 
+# requested April 4
+
+tara_md$NO3 <- tara_md$NO2NO3 - tara_md$NO2
+tara_md$log_NO3 <- log10(fudge_vec(tara_md$NO3))
+
+all_no2no3 <- tara_md |> 
+  rownames_to_column(var = "measurement") |> 
+  select(measurement, log_NO2, log_NO3) |> 
+  drop_na()
+
+no2no3_master_table <- COGabun_long |> 
+  left_join(all_no2no3, by = "measurement") |> 
+  mutate(logabun = log(abundance)) |> 
+  filter(!is.infinite(logabun)) |> # filter out logs of -Inf (abundance = 0)
+  filter(!(COG %in% c("COG4211", "COG4811")))
+
+no2no3_exp_coefficients <- no2no3_master_table |> 
+  filter(COG %in% jos.cogs) |> 
+  group_by(COG) |> 
+  filter(!(COG %in% cogs.to.filter)) |> 
+  summarize(no2_int   = lm(logabun ~ log_NO2)$coefficients[1],
+            no2_slope = lm(logabun ~ log_NO2)$coefficients[2],
+            no2_pval  = summary(lm(logabun ~ log_NO2))$coefficients[2, 4],
+            no2_rsq   = summary(lm(logabun ~ log_NO2))$r.squared,
+            no3_int   = lm(logabun ~ log_NO3)$coefficients[1],
+            no3_slope = lm(logabun ~ log_NO3)$coefficients[2],
+            no3_pval  = summary(lm(logabun ~ log_NO3))$coefficients[2, 4],
+            no3_rsq   = summary(lm(logabun ~ log_NO3))$r.squared,
+            sum_rsq   = sum(no2_rsq, no3_rsq)) |> 
+  filter(no2_slope*no3_slope < 0) |> 
+  arrange(desc(sum_rsq))
+
+# need a new curve graphing function
+my_no2no3_curve <- function(x, cog, table = no2no3_exp_coefficients, mode) {
+  table = table |> filter(table$COG == cog)
+  
+  if(mode == "NO2") {
+    return(exp(table$no2_int)*exp(x * table$no2_slope))
+  } else if (mode == "NO3") {
+    return(exp(table$no3_int)*exp(x * table$no3_slope))
+  }
+}
+```
+
+```{r request 5 graphs, include = T, echo = F}
+library(patchwork)
+
+if (generate_opposite_direction_no2_no3_graphs == TRUE) {
+  for (i in 1:nrow(no2no3_exp_coefficients)) {
+    current_COG <- no2no3_exp_coefficients[i, "COG"] |> as.character()
+    current_table <- no2no3_master_table |> filter(COG == current_COG)
+    
+    p1 <- ggplot() +
+      geom_point(data = current_table, mapping = aes(y = abundance, x = log_NO2)) +
+      geom_function(fun = my_no2no3_curve, color = "blue",
+          args = list(cog = current_COG, mode = "NO2")) +
+      labs(title = current_COG, subtitle = "NO2", y = "Abundance") +
+      theme_light()
+    
+    p2 <- ggplot() +
+      geom_point(data = current_table, mapping = aes(y = abundance, x = log_NO3)) +
+      geom_function(fun = my_no2no3_curve, color = "blue",
+          args = list(cog = current_COG, mode = "NO3")) +
+      labs(title = current_COG, subtitle = "NO3", y = "Abundance") +
+      theme_light()
+    
+    print(p1+p2)
+  }
+}
+```
+
