@@ -1,0 +1,385 @@
+COG0001	H	 Coenzyme transport and metabolism;	Glutamate-1-semialdehyde aminotransferase
+COG0002	E	 Amino acid transport and metabolism;	N-acetyl-gamma-glutamylphosphate reductase
+COG0006	E	 Amino acid transport and metabolism;	Xaa-Pro aminopeptidase
+COG0010	E	 Amino acid transport and metabolism;	Arginase family enzyme
+COG0014	E	 Amino acid transport and metabolism;	Gamma-glutamyl phosphate reductase
+COG0019	E	 Amino acid transport and metabolism;	Diaminopimelate decarboxylase
+COG0024	J	 Translation, ribosomal structure and biogenesis;	Methionine aminopeptidase
+COG0028	EH	 Amino acid transport and metabolism; Coenzyme transport and metabolism;	Acetolactate synthase large subunit or other thiamine pyrophosphate-requiring enzyme
+COG0031	E	 Amino acid transport and metabolism;	Cysteine synthase
+COG0034	F	 Nucleotide transport and metabolism;	Glutamine phosphoribosylpyrophosphate amidotransferase
+COG0040	E	 Amino acid transport and metabolism;	ATP phosphoribosyltransferase
+COG0047	F	 Nucleotide transport and metabolism;	Phosphoribosylformylglycinamidine (FGAM) synthase, glutamine amidotransferase domain
+COG0059	EH	 Amino acid transport and metabolism; Coenzyme transport and metabolism;	Ketol-acid reductoisomerase
+COG0064	J	 Translation, ribosomal structure and biogenesis;	Asp-tRNAAsn/Glu-tRNAGln amidotransferase B subunit
+COG0065	E	 Amino acid transport and metabolism;	Homoaconitase/3-isopropylmalate dehydratase large subunit
+COG0066	E	 Amino acid transport and metabolism;	3-isopropylmalate dehydratase small subunit
+COG0067	E	 Amino acid transport and metabolism;	Glutamate synthase domain 1
+COG0069	E	 Amino acid transport and metabolism;	Glutamate synthase domain 2
+COG0070	E	 Amino acid transport and metabolism;	Glutamate synthase domain 3
+COG0075	EF	 Amino acid transport and metabolism; Nucleotide transport and metabolism;	Archaeal aspartate aminotransferase or a related aminotransferase, includes purine catabolism protein PucG
+COG0076	E	 Amino acid transport and metabolism;	Glutamate or tyrosine decarboxylase or a related PLP-dependent protein
+COG0077	E	 Amino acid transport and metabolism;	Prephenate dehydratase
+COG0078	E	 Amino acid transport and metabolism;	Ornithine carbamoyltransferase
+COG0079	E	 Amino acid transport and metabolism;	Histidinol-phosphate/aromatic aminotransferase or cobyric acid decarboxylase
+COG0082	E	 Amino acid transport and metabolism;	Chorismate synthase
+COG0083	E	 Amino acid transport and metabolism;	Homoserine kinase
+COG0106	E	 Amino acid transport and metabolism;	Phosphoribosylformimino-5-aminoimidazole carboxamide ribonucleotide (ProFAR) isomerase
+COG0107	E	 Amino acid transport and metabolism;	Imidazole glycerol phosphate synthase subunit HisF
+COG0112	E	 Amino acid transport and metabolism;	Glycine/serine hydroxymethyltransferase
+COG0115	EH	 Amino acid transport and metabolism; Coenzyme transport and metabolism;	Branched-chain amino acid aminotransferase/4-amino-4-deoxychorismate lyase
+COG0117	H	 Coenzyme transport and metabolism;	Pyrimidine deaminase domain of riboflavin biosynthesis protein RibD
+COG0118	E	 Amino acid transport and metabolism;	Imidazoleglycerol phosphate synthase glutamine amidotransferase subunit HisH
+COG0119	E	 Amino acid transport and metabolism;	Isopropylmalate/homocitrate/citramalate synthases
+COG0121	R	 General function prediction only;	Predicted glutamine amidotransferase
+COG0128	E	 Amino acid transport and metabolism;	5-enolpyruvylshikimate-3-phosphate synthase
+COG0129	EG	 Amino acid transport and metabolism; Carbohydrate transport and metabolism;	Dihydroxyacid dehydratase/phosphogluconate dehydratase
+COG0131	E	 Amino acid transport and metabolism;	Imidazoleglycerol phosphate dehydratase HisB
+COG0133	E	 Amino acid transport and metabolism;	Tryptophan synthase beta chain
+COG0134	E	 Amino acid transport and metabolism;	Indole-3-glycerol phosphate synthase
+COG0135	E	 Amino acid transport and metabolism;	Phosphoribosylanthranilate isomerase
+COG0136	E	 Amino acid transport and metabolism;	Aspartate-semialdehyde dehydrogenase
+COG0137	E	 Amino acid transport and metabolism;	Argininosuccinate synthase
+COG0139	E	 Amino acid transport and metabolism;	Phosphoribosyl-AMP cyclohydrolase
+COG0140	E	 Amino acid transport and metabolism;	Phosphoribosyl-ATP pyrophosphohydrolase
+COG0141	E	 Amino acid transport and metabolism;	Histidinol dehydrogenase
+COG0145	EQ	 Amino acid transport and metabolism; Secondary metabolites biosynthesis, transport, and catabolism;	N-methylhydantoinase A/oxoprolinase/acetone carboxylase, beta subunit
+COG0146	EQ	 Amino acid transport and metabolism; Secondary metabolites biosynthesis, transport, and catabolism;	N-methylhydantoinase B/oxoprolinase/acetone carboxylase, alpha subunit
+COG0147	EH	 Amino acid transport and metabolism; Coenzyme transport and metabolism;	Anthranilate/para-aminobenzoate synthases component I
+COG0154	J	 Translation, ribosomal structure and biogenesis;	Asp-tRNAAsn/Glu-tRNAGln amidotransferase A subunit or related amidase
+COG0159	E	 Amino acid transport and metabolism;	Tryptophan synthase alpha chain
+COG0160	E	 Amino acid transport and metabolism;	4-aminobutyrate aminotransferase or related aminotransferase
+COG0161	H	 Coenzyme transport and metabolism;	Adenosylmethionine-8-amino-7-oxononanoate aminotransferase
+COG0165	E	 Amino acid transport and metabolism;	Argininosuccinate lyase
+COG0169	E	 Amino acid transport and metabolism;	Shikimate 5-dehydrogenase
+COG0174	E	 Amino acid transport and metabolism;	Glutamine synthetase
+COG0175	EH	 Amino acid transport and metabolism; Coenzyme transport and metabolism;	3'-phosphoadenosine 5'-phosphosulfate sulfotransferase (PAPS reductase)/FAD synthetase or related enzyme
+COG0181	H	 Coenzyme transport and metabolism;	Porphobilinogen deaminase
+COG0182	E	 Amino acid transport and metabolism;	Methylthioribose-1-phosphate isomerase (methionine salvage pathway), a paralog of eIF-2B alpha subunit
+COG0241	E	 Amino acid transport and metabolism;	Histidinol phosphatase or a related phosphatase
+COG0251	V	 Defense mechanisms;	Enamine deaminase RidA, house cleaning of reactive enamine intermediates, YjgF/YER057c/UK114 family
+COG0252	JU	 Translation, ribosomal structure and biogenesis; Intracellular trafficking, secretion, and vesicular transport;	L-asparaginase/archaeal Glu-tRNAGln amidotransferase subunit D
+COG0253	E	 Amino acid transport and metabolism;	Diaminopimelate epimerase
+COG0260	E	 Amino acid transport and metabolism;	Leucyl aminopeptidase
+COG0263	E	 Amino acid transport and metabolism;	Glutamate 5-kinase
+COG0285	H	 Coenzyme transport and metabolism;	Folylpolyglutamate synthase/Dihydropteroate synthase
+COG0287	E	 Amino acid transport and metabolism;	Prephenate dehydrogenase
+COG0289	E	 Amino acid transport and metabolism;	Dihydrodipicolinate reductase
+COG0295	F	 Nucleotide transport and metabolism;	Cytidine deaminase
+COG0308	E	 Amino acid transport and metabolism;	Aminopeptidase N
+COG0311	H	 Coenzyme transport and metabolism;	Glutamine amidotransferase PdxT (pyridoxal biosynthesis)
+COG0329	EM	 Amino acid transport and metabolism; Cell wall/membrane/envelope biogenesis;	Dihydrodipicolinate synthase/N-acetylneuraminate lyase
+COG0334	E	 Amino acid transport and metabolism;	Glutamate dehydrogenase/leucine dehydrogenase
+COG0337	E	 Amino acid transport and metabolism;	3-dehydroquinate synthetase
+COG0339	E	 Amino acid transport and metabolism;	Zn-dependent oligopeptidase
+COG0345	E	 Amino acid transport and metabolism;	Pyrroline-5-carboxylate reductase
+COG0347	TE	 Signal transduction mechanisms; Amino acid transport and metabolism;	Nitrogen regulatory protein PII
+COG0363	G	 Carbohydrate transport and metabolism;	6-phosphogluconolactonase/Glucosamine-6-phosphate isomerase/deaminase
+COG0367	E	 Amino acid transport and metabolism;	Asparagine synthetase B (glutamine-hydrolyzing)
+COG0399	M	 Cell wall/membrane/envelope biogenesis;	dTDP-4-amino-4,6-dideoxygalactose transaminase
+COG0402	FR	 Nucleotide transport and metabolism; General function prediction only;	Cytosine/adenosine deaminase or related metal-dependent hydrolase
+COG0403	E	 Amino acid transport and metabolism;	Glycine cleavage system protein P (pyridoxal-binding), N-terminal domain
+COG0404	E	 Amino acid transport and metabolism;	Glycine cleavage system T protein (aminomethyltransferase)
+COG0405	E	 Amino acid transport and metabolism;	Gamma-glutamyltranspeptidase
+COG0410	E	 Amino acid transport and metabolism;	ABC-type branched-chain amino acid transport system, ATPase component
+COG0411	E	 Amino acid transport and metabolism;	ABC-type branched-chain amino acid transport system, ATPase component
+COG0421	E	 Amino acid transport and metabolism;	Spermidine synthase
+COG0436	E	 Amino acid transport and metabolism;	Aspartate/methionine/tyrosine aminotransferase
+COG0440	E	 Amino acid transport and metabolism;	Acetolactate synthase, small subunit
+COG0444	EP	 Amino acid transport and metabolism; Inorganic ion transport and metabolism;	ABC-type dipeptide/oligopeptide/nickel transport system, ATPase component
+COG0449	M	 Cell wall/membrane/envelope biogenesis;	Glucosamine 6-phosphate synthetase, contains amidotransferase and phosphosugar isomerase domains
+COG0458	EF	 Amino acid transport and metabolism; Nucleotide transport and metabolism;	Carbamoylphosphate synthase large subunit
+COG0460	E	 Amino acid transport and metabolism;	Homoserine dehydrogenase
+COG0462	FE	 Nucleotide transport and metabolism; Amino acid transport and metabolism;	Phosphoribosylpyrophosphate synthetase
+COG0473	CE	 Energy production and conversion; Amino acid transport and metabolism;	Isocitrate/isopropylmalate dehydrogenase
+COG0477	GEPR	 Carbohydrate transport and metabolism; Amino acid transport and metabolism; Inorganic ion transport and metabolism; General function prediction only;	MFS family permease
+COG0493	ER	 Amino acid transport and metabolism; General function prediction only;	NADPH-dependent glutamate synthase beta chain or related oxidoreductase
+COG0498	E	 Amino acid transport and metabolism;	Threonine synthase
+COG0505	EF	 Amino acid transport and metabolism; Nucleotide transport and metabolism;	Carbamoylphosphate synthase small subunit
+COG0506	E	 Amino acid transport and metabolism;	Proline dehydrogenase
+COG0509	E	 Amino acid transport and metabolism;	Glycine cleavage system H protein (lipoate-binding)
+COG0512	EH	 Amino acid transport and metabolism; Coenzyme transport and metabolism;	Anthranilate/para-aminobenzoate synthase component II
+COG0518	F	 Nucleotide transport and metabolism;	GMP synthase - Glutamine amidotransferase domain
+COG0520	E	 Amino acid transport and metabolism;	Selenocysteine lyase/Cysteine desulfurase
+COG0527	E	 Amino acid transport and metabolism;	Aspartokinase
+COG0531	E	 Amino acid transport and metabolism;	Amino acid transporter
+COG0547	E	 Amino acid transport and metabolism;	Anthranilate phosphoribosyltransferase
+COG0548	E	 Amino acid transport and metabolism;	Acetylglutamate kinase
+COG0549	E	 Amino acid transport and metabolism;	Carbamate kinase
+COG0559	E	 Amino acid transport and metabolism;	Branched-chain amino acid ABC-type transport system, permease component
+COG0560	E	 Amino acid transport and metabolism;	Phosphoserine phosphatase
+COG0590	J	 Translation, ribosomal structure and biogenesis;	tRNA(Arg) A34 adenosine deaminase TadA
+COG0591	E	 Amino acid transport and metabolism;	Na+/proline symporter
+COG0600	P	 Inorganic ion transport and metabolism;	ABC-type nitrate/sulfonate/bicarbonate transport system, permease component
+COG0601	EP	 Amino acid transport and metabolism; Inorganic ion transport and metabolism;	ABC-type dipeptide/oligopeptide/nickel transport system, permease component
+COG0620	E	 Amino acid transport and metabolism;	Methionine synthase II (cobalamin-independent)
+COG0624	E	 Amino acid transport and metabolism;	Acetylornithine deacetylase/Succinyl-diaminopimelate desuccinylase or related deacylase
+COG0626	E	 Amino acid transport and metabolism;	Cystathionine beta-lyase/cystathionine gamma-synthase
+COG0646	E	 Amino acid transport and metabolism;	Methionine synthase I (cobalamin-dependent), methyltransferase domain
+COG0665	E	 Amino acid transport and metabolism;	Glycine/D-amino acid oxidase (deaminating)
+COG0683	E	 Amino acid transport and metabolism;	ABC-type branched-chain amino acid transport system, periplasmic component
+COG0685	E	 Amino acid transport and metabolism;	5,10-methylenetetrahydrofolate reductase
+COG0686	E	 Amino acid transport and metabolism;	Alanine dehydrogenase
+COG0687	E	 Amino acid transport and metabolism;	Spermidine/putrescine-binding periplasmic protein
+COG0693	R	 General function prediction only;	Putative intracellular protease/amidase
+COG0697	GER	 Carbohydrate transport and metabolism; Amino acid transport and metabolism; General function prediction only;	Permease of the drug/metabolite transporter (DMT) superfamily
+COG0703	E	 Amino acid transport and metabolism;	Shikimate kinase
+COG0709	E	 Amino acid transport and metabolism;	Selenophosphate synthase
+COG0710	E	 Amino acid transport and metabolism;	3-dehydroquinate dehydratase
+COG0715	P	 Inorganic ion transport and metabolism;	ABC-type nitrate/sulfonate/bicarbonate transport system, periplasmic component
+COG0717	F	 Nucleotide transport and metabolism;	Deoxycytidine triphosphate deaminase
+COG0721	J	 Translation, ribosomal structure and biogenesis;	Asp-tRNAAsn/Glu-tRNAGln amidotransferase C subunit
+COG0722	E	 Amino acid transport and metabolism;	3-deoxy-D-arabino-heptulosonate 7-phosphate (DAHP) synthase
+COG0747	E	 Amino acid transport and metabolism;	ABC-type transport system, periplasmic component
+COG0754	E	 Amino acid transport and metabolism;	Glutathionylspermidine synthase
+COG0757	E	 Amino acid transport and metabolism;	3-dehydroquinate dehydratase
+COG0765	E	 Amino acid transport and metabolism;	ABC-type amino acid transport system, permease component
+COG0771	M	 Cell wall/membrane/envelope biogenesis;	UDP-N-acetylmuramoylalanine-D-glutamate ligase
+COG0778	C	 Energy production and conversion;	Nitroreductase
+COG0786	E	 Amino acid transport and metabolism;	Na+/glutamate symporter
+COG0796	M	 Cell wall/membrane/envelope biogenesis;	Glutamate racemase
+COG0804	E	 Amino acid transport and metabolism;	Urease alpha subunit
+COG0814	E	 Amino acid transport and metabolism;	Amino acid permease
+COG0819	H	 Coenzyme transport and metabolism;	Thiaminase
+COG0831	E	 Amino acid transport and metabolism;	Urease gamma subunit
+COG0832	E	 Amino acid transport and metabolism;	Urease beta subunit
+COG0833	E	 Amino acid transport and metabolism;	Amino acid permease
+COG0834	ET	 Amino acid transport and metabolism; Signal transduction mechanisms;	ABC-type amino acid transport/signal transduction system, periplasmic component/domain
+COG0860	M	 Cell wall/membrane/envelope biogenesis;	N-acetylmuramoyl-L-alanine amidase
+COG1001	F	 Nucleotide transport and metabolism;	Adenine deaminase
+COG1003	E	 Amino acid transport and metabolism;	Glycine cleavage system protein P (pyridoxal-binding), C-terminal domain
+COG1027	E	 Amino acid transport and metabolism;	Aspartate ammonia-lyase
+COG1045	E	 Amino acid transport and metabolism;	Serine acetyltransferase
+COG1063	ER	 Amino acid transport and metabolism; General function prediction only;	Threonine dehydrogenase or related Zn-dependent dehydrogenase
+COG1104	E	 Amino acid transport and metabolism;	Cysteine sulfinate desulfinase/cysteine desulfurase or related enzyme
+COG1113	E	 Amino acid transport and metabolism;	L-asparagine transporter and related permeases
+COG1114	E	 Amino acid transport and metabolism;	Branched-chain amino acid permeases
+COG1115	E	 Amino acid transport and metabolism;	Na+/alanine symporter
+COG1116	P	 Inorganic ion transport and metabolism;	ABC-type nitrate/sulfonate/bicarbonate transport system, ATPase component
+COG1124	EP	 Amino acid transport and metabolism; Inorganic ion transport and metabolism;	ABC-type dipeptide/oligopeptide/nickel transport system, ATPase component
+COG1125	E	 Amino acid transport and metabolism;	ABC-type proline/glycine betaine transport system, ATPase component
+COG1126	E	 Amino acid transport and metabolism;	ABC-type polar amino acid transport system, ATPase component
+COG1135	E	 Amino acid transport and metabolism;	ABC-type methionine transport system, ATPase component
+COG1140	CP	 Energy production and conversion; Inorganic ion transport and metabolism;	Nitrate reductase beta subunit
+COG1164	E	 Amino acid transport and metabolism;	Oligoendopeptidase F
+COG1166	E	 Amino acid transport and metabolism;	Arginine decarboxylase (spermidine biosynthesis)
+COG1167	KE	 Transcription; Amino acid transport and metabolism;	DNA-binding transcriptional regulator, MocR family, contains an aminotransferase domain
+COG1167	KE	 Transcription; Amino acid transport and metabolism;	DNA-binding transcriptional regulator, MocR family, contains an aminotransferase domain
+COG1168	ER	 Amino acid transport and metabolism; General function prediction only;	Bifunctional PLP-dependent enzyme with beta-cystathionase and maltose regulon repressor activities
+COG1171	E	 Amino acid transport and metabolism;	Threonine dehydratase
+COG1173	EP	 Amino acid transport and metabolism; Inorganic ion transport and metabolism;	ABC-type dipeptide/oligopeptide/nickel transport system, permease component
+COG1174	E	 Amino acid transport and metabolism;	ABC-type proline/glycine betaine transport system, permease component
+COG1176	E	 Amino acid transport and metabolism;	ABC-type spermidine/putrescine transport system, permease component I
+COG1177	E	 Amino acid transport and metabolism;	ABC-type spermidine/putrescine transport system, permease component II
+COG1231	E	 Amino acid transport and metabolism;	Monoamine oxidase
+COG1246	E	 Amino acid transport and metabolism;	N-acetylglutamate synthase or related acetyltransferase, GNAT family
+COG1247	E	 Amino acid transport and metabolism;	L-amino acid N-acyltransferase YncA
+COG1251	C	 Energy production and conversion;	NAD(P)H-nitrite reductase, large subunit
+COG1279	E	 Amino acid transport and metabolism;	Arginine exporter protein ArgO
+COG1280	E	 Amino acid transport and metabolism;	Threonine/homoserine/homoserine lactone efflux protein
+COG1296	E	 Amino acid transport and metabolism;	Predicted branched-chain amino acid permease (azaleucine resistance)
+COG1305	O	 Post-translational modification, protein turnover, and chaperones;	Transglutaminase-like enzyme, putative cysteine protease
+COG1335	HR	 Coenzyme transport and metabolism; General function prediction only;	Nicotinamidase-related amidase
+COG1348	P	 Inorganic ion transport and metabolism;	Nitrogenase subunit NifH, an ATPase
+COG1350	E	 Amino acid transport and metabolism;	Predicted alternative tryptophan synthase beta-subunit (paralog of TrpB)
+COG1362	E	 Amino acid transport and metabolism;	Aspartyl aminopeptidase
+COG1363	EG	 Amino acid transport and metabolism; Carbohydrate transport and metabolism;	Putative aminopeptidase FrvX
+COG1364	E	 Amino acid transport and metabolism;	N-acetylglutamate synthase (N-acetylornithine aminotransferase)
+COG1387	ER	 Amino acid transport and metabolism; General function prediction only;	Histidinol phosphatase or related hydrolase of the PHP family
+COG1391	O	 Post-translational modification, protein turnover, and chaperones;	Glutamine synthetase adenylyltransferase
+COG1410	E	 Amino acid transport and metabolism;	Methionine synthase I, cobalamin-binding domain
+COG1446	E	 Amino acid transport and metabolism;	Isoaspartyl peptidase or L-asparaginase, Ntn-hydrolase superfamily
+COG1448	E	 Amino acid transport and metabolism;	Aspartate/tyrosine/aromatic aminotransferase
+COG1465	E	 Amino acid transport and metabolism;	3-dehydroquinate synthase, class II
+COG1473	R	 General function prediction only;	Metal-dependent amidase/aminoacylase/carboxypeptidase
+COG1505	E	 Amino acid transport and metabolism;	Prolyl oligopeptidase PreP, S9A serine peptidase family
+COG1506	E	 Amino acid transport and metabolism;	Dipeptidyl aminopeptidase/acylaminoacyl peptidase
+COG1509	E	 Amino acid transport and metabolism;	L-lysine 2,3-aminomutase (EF-P beta-lysylation pathway)
+COG1546	H	 Coenzyme transport and metabolism;	Nicotinamide mononucleotide (NMN) deamidase PncC
+COG1586	E	 Amino acid transport and metabolism;	S-adenosylmethionine decarboxylase or arginine decarboxylase
+COG1605	E	 Amino acid transport and metabolism;	Chorismate mutase
+COG1685	E	 Amino acid transport and metabolism;	Archaeal shikimate kinase
+COG1687	E	 Amino acid transport and metabolism;	Branched-chain amino acid transport protein AzlD
+COG1748	E	 Amino acid transport and metabolism;	Saccharopine dehydrogenase, NADP-dependent
+COG1760	E	 Amino acid transport and metabolism;	L-serine deaminase
+COG1760	E	 Amino acid transport and metabolism;	L-serine deaminase
+COG1770	E	 Amino acid transport and metabolism;	Protease II
+COG1791	E	 Amino acid transport and metabolism;	Acireductone dioxygenase (methionine salvage), cupin superfamily
+COG1794	M	 Cell wall/membrane/envelope biogenesis;	Aspartate/glutamate racemase
+COG1800	R	 General function prediction only;	Predicted transglutaminase-like protease
+COG1816	F	 Nucleotide transport and metabolism;	Adenosine deaminase
+COG1823	E	 Amino acid transport and metabolism;	L-cystine uptake protein TcyP, sodium:dicarboxylate symporter family
+COG1834	E	 Amino acid transport and metabolism;	N-Dimethylarginine dimethylaminohydrolase
+COG1871	NT	 Cell motility; Signal transduction mechanisms;	Chemotaxis receptor (MCP) glutamine deamidase CheD
+COG1878	E	 Amino acid transport and metabolism;	Kynurenine formamidase
+COG1881	R	 General function prediction only;	Uncharacterized conserved protein, phosphatidylethanolamine-binding protein (PEBP) family
+COG1897	E	 Amino acid transport and metabolism;	Homoserine trans-succinylase
+COG1932	HE	 Coenzyme transport and metabolism; Amino acid transport and metabolism;	Phosphoserine aminotransferase
+COG1945	E	 Amino acid transport and metabolism;	Pyruvoyl-dependent arginine decarboxylase (PvlArgDC)
+COG1982	E	 Amino acid transport and metabolism;	Arginine/lysine/ornithine decarboxylase
+COG1984	E	 Amino acid transport and metabolism;	Allophanate hydrolase subunit 2
+COG2008	E	 Amino acid transport and metabolism;	Threonine aldolase
+COG2011	E	 Amino acid transport and metabolism;	ABC-type methionine transport system, permease component
+COG2021	E	 Amino acid transport and metabolism;	Homoserine acetyltransferase
+COG2040	E	 Amino acid transport and metabolism;	Homocysteine/selenocysteine methylase (S-methylmethionine-dependent)
+COG2049	E	 Amino acid transport and metabolism;	Allophanate hydrolase subunit 1
+COG2056	E	 Amino acid transport and metabolism;	Predicted histidine transporter YuiF, NhaC family
+COG2066	E	 Amino acid transport and metabolism;	Glutaminase
+COG2070	R	 General function prediction only;	NAD(P)H-dependent flavin oxidoreductase YrpB, nitropropane dioxygenase family
+COG2071	E	 Amino acid transport and metabolism;	Gamma-glutamyl-gamma-aminobutyrate hydrolase PuuD (putrescine degradation), contains GATase1-like domain
+COG2095	E	 Amino acid transport and metabolism;	Small neutral amino acid transporter SnatA, MarC family
+COG2113	E	 Amino acid transport and metabolism;	ABC-type proline/glycine betaine transport system, periplasmic component
+COG2116	P	 Inorganic ion transport and metabolism;	Formate/nitrite transporter FocA, FNT family
+COG2131	F	 Nucleotide transport and metabolism;	Deoxycytidylate deaminase
+COG2146	PQ	 Inorganic ion transport and metabolism; Secondary metabolites biosynthesis, transport, and catabolism;	Ferredoxin subunit of nitrite reductase or a ring-hydroxylating dioxygenase
+COG2171	E	 Amino acid transport and metabolism;	Tetrahydrodipicolinate N-succinyltransferase
+COG2180	CPO	 Energy production and conversion; Inorganic ion transport and metabolism; Post-translational modification, protein turnover, and chaperones;	Nitrate reductase assembly protein NarJ, required for insertion of molybdenum cofactor
+COG2181	CP	 Energy production and conversion; Inorganic ion transport and metabolism;	Nitrate reductase gamma subunit
+COG2194	M	 Cell wall/membrane/envelope biogenesis;	Phosphoethanolamine transferase for periplasmic glucans (OPG), alkaline phosphatase superfamily
+COG2195	E	 Amino acid transport and metabolism;	Di- or tripeptidase
+COG2201	NT	 Cell motility; Signal transduction mechanisms;	Chemotaxis response regulator CheB, contains REC and protein-glutamate methylesterase domains
+COG2223	P	 Inorganic ion transport and metabolism;	Nitrate/nitrite transporter NarK
+COG2235	E	 Amino acid transport and metabolism;	Arginine deiminase
+COG2309	E	 Amino acid transport and metabolism;	Leucyl aminopeptidase (aminopeptidase T)
+COG2317	E	 Amino acid transport and metabolism;	Zn-dependent carboxypeptidase, M32 family
+COG2355	E	 Amino acid transport and metabolism;	Zn-dependent dipeptidase, microsomal dipeptidase homolog
+COG2362	E	 Amino acid transport and metabolism;	D-aminopeptidase
+COG2385	M	 Cell wall/membrane/envelope biogenesis;	Peptidoglycan hydrolase (amidase) enhancer domain
+COG2421	C	 Energy production and conversion;	Acetamidase/formamidase
+COG2423	E	 Amino acid transport and metabolism;	Ornithine cyclodeaminase/archaeal alanine dehydrogenase, mu-crystallin family
+COG2502	E	 Amino acid transport and metabolism;	Asparagine synthetase A
+COG2511	J	 Translation, ribosomal structure and biogenesis;	Archaeal Glu-tRNAGln amidotransferase subunit E, contains GAD domain
+COG2515	E	 Amino acid transport and metabolism;	1-aminocyclopropane-1-carboxylate deaminase/D-cysteine desulfhydrase, PLP-dependent ACC family
+COG2710	P	 Inorganic ion transport and metabolism;	Nitrogenase molybdenum-iron protein, alpha and beta chains
+COG2716	E	 Amino acid transport and metabolism;	Glycine cleavage system regulatory protein
+COG2755	E	 Amino acid transport and metabolism;	Lysophospholipase L1 or related esterase
+COG2843	M	 Cell wall/membrane/envelope biogenesis;	Poly-gamma-glutamate biosynthesis protein CapA/YwtB (capsule formation), metallophosphatase superfamily
+COG2856	E	 Amino acid transport and metabolism;	Zn-dependent peptidase ImmA, M78 family
+COG2866	M	 Cell wall/membrane/envelope biogenesis;	Murein tripeptide amidase MpaA
+COG2873	E	 Amino acid transport and metabolism;	O-acetylhomoserine/O-acetylserine sulfhydrylase, pyridoxal phosphate-dependent
+COG2876	E	 Amino acid transport and metabolism;	3-deoxy-D-arabino-heptulosonate 7-phosphate (DAHP) synthase
+COG2902	E	 Amino acid transport and metabolism;	NAD-specific glutamate dehydrogenase
+COG2912	T	 Signal transduction mechanisms;	Regulator of sirC expression, contains transglutaminase-like and TPR domains
+COG2939	E	 Amino acid transport and metabolism;	Carboxypeptidase C (cathepsin A)
+COG2957	E	 Amino acid transport and metabolism;	Agmatine/peptidylarginine deiminase
+COG2978	H	 Coenzyme transport and metabolism;	p-Aminobenzoyl-glutamate transporter AbgT
+COG2981	E	 Amino acid transport and metabolism;	Uncharacterized protein involved in cysteine biosynthesis
+COG2986	E	 Amino acid transport and metabolism;	Histidine ammonia-lyase
+COG2987	E	 Amino acid transport and metabolism;	Urocanate hydratase
+COG2988	E	 Amino acid transport and metabolism;	Succinylglutamate desuccinylase
+COG3005	C	 Energy production and conversion;	Tetraheme cytochrome c subunit of nitrate or TMAO reductase
+COG3023	M	 Cell wall/membrane/envelope biogenesis;	N-acetyl-anhydromuramyl-L-alanine amidase AmpD
+COG3033	E	 Amino acid transport and metabolism;	Tryptophanase
+COG3043	CP	 Energy production and conversion; Inorganic ion transport and metabolism;	Nitrate reductase cytochrome c-type subunit
+COG3048	E	 Amino acid transport and metabolism;	D-serine dehydratase
+COG3049	MR	 Cell wall/membrane/envelope biogenesis; General function prediction only;	Penicillin V acylase or related amidase, Ntn superfamily
+COG3060	KE	 Transcription; Amino acid transport and metabolism;	Transcriptional regulator of met regulon
+COG3062	O	 Post-translational modification, protein turnover, and chaperones;	Cytoplasmic chaperone NapD for the signal peptide of periplasmic nitrate reductase NapAB
+COG3075	E	 Amino acid transport and metabolism;	Anaerobic glycerol-3-phosphate dehydrogenase
+COG3104	E	 Amino acid transport and metabolism;	Dipeptide/tripeptide permease
+COG3138	E	 Amino acid transport and metabolism;	Arginine/ornithine N-succinyltransferase beta subunit
+COG3185	ER	 Amino acid transport and metabolism; General function prediction only;	4-hydroxyphenylpyruvate dioxygenase and related hemolysins
+COG3186	E	 Amino acid transport and metabolism;	Phenylalanine-4-hydroxylase
+COG3191	EQ	 Amino acid transport and metabolism; Secondary metabolites biosynthesis, transport, and catabolism;	L-aminopeptidase/D-esterase
+COG3192	E	 Amino acid transport and metabolism;	Ethanolamine transporter EutH, required for ethanolamine utilization at low pH
+COG3197	P	 Inorganic ion transport and metabolism;	Uncharacterized protein, possibly involved in nitrogen fixation
+COG3200	E	 Amino acid transport and metabolism;	3-deoxy-D-arabino-heptulosonate 7-phosphate (DAHP) synthase, class II
+COG3232	E	 Amino acid transport and metabolism;	5-carboxymethyl-2-hydroxymuconate isomerase
+COG3256	P	 Inorganic ion transport and metabolism;	Nitric oxide reductase large subunit
+COG3283	KE	 Transcription; Amino acid transport and metabolism;	Transcriptional regulator of aromatic amino acids metabolism
+COG3301	P	 Inorganic ion transport and metabolism;	Formate-dependent nitrite reductase, membrane component NrfD
+COG3303	P	 Inorganic ion transport and metabolism;	Formate-dependent nitrite reductase, periplasmic cytochrome c552 subunit
+COG3340	E	 Amino acid transport and metabolism;	Peptidase E
+COG3356	I	 Lipid transport and metabolism;	Predicted membrane-associated lipid hydrolase, neutral ceramidase superfamily
+COG3404	E	 Amino acid transport and metabolism;	Formiminotetrahydrofolate cyclodeaminase
+COG3420	P	 Inorganic ion transport and metabolism;	Nitrous oxidase accessory protein NosD, contains tandem CASH domains
+COG3442	R	 General function prediction only;	Glutamine amidotransferase related to the GATase domain of CobQ
+COG3457	E	 Amino acid transport and metabolism;	Predicted amino acid racemase
+COG3467	V	 Defense mechanisms;	Nitroimidazol reductase NimA or a related FMN-containing flavoprotein, pyridoxamine 5'-phosphate oxidase superfamily
+COG3483	E	 Amino acid transport and metabolism;	Tryptophan 2,3-dioxygenase (vermilion)
+COG3579	E	 Amino acid transport and metabolism;	Aminopeptidase C
+COG3579	E	 Amino acid transport and metabolism;	Aminopeptidase C
+COG3591	E	 Amino acid transport and metabolism;	V8-like Glu-specific endopeptidase
+COG3616	E	 Amino acid transport and metabolism;	D-serine deaminase, pyridoxal phosphate-dependent
+COG3633	E	 Amino acid transport and metabolism;	Na+/serine symporter
+COG3643	E	 Amino acid transport and metabolism;	Glutamate formiminotransferase
+COG3653	Q	 Secondary metabolites biosynthesis, transport, and catabolism;	N-acyl-D-aspartate/D-glutamate deacylase
+COG3672	O	 Post-translational modification, protein turnover, and chaperones;	Predicted transglutaminase-like cysteine proteinase
+COG3681	E	 Amino acid transport and metabolism;	L-cysteine desulfidase
+COG3705	E	 Amino acid transport and metabolism;	ATP phosphoribosyltransferase regulatory subunit HisZ
+COG3724	E	 Amino acid transport and metabolism;	Succinylarginine dihydrolase
+COG3741	E	 Amino acid transport and metabolism;	N-formylglutamate amidohydrolase
+COG3757	M	 Cell wall/membrane/envelope biogenesis;	Lyzozyme M1 (1,4-beta-N-acetylmuramidase), GH25 family
+COG3772	M	 Cell wall/membrane/envelope biogenesis;	Phage-related lysozyme (muramidase), GH24 family
+COG3799	E	 Amino acid transport and metabolism;	Methylaspartate ammonia-lyase
+COG3823	O	 Post-translational modification, protein turnover, and chaperones;	Glutamine cyclotransferase
+COG3828	R	 General function prediction only;	Type 1 glutamine amidotransferase (GATase1)-like domain
+COG3842	E	 Amino acid transport and metabolism;	ABC-type Fe3+/spermidine/putrescine transport systems, ATPase components
+COG3844	E	 Amino acid transport and metabolism;	Kynureninase
+COG3850	T	 Signal transduction mechanisms;	Signal transduction histidine kinase, nitrate/nitrite-specific
+COG3852	T	 Signal transduction mechanisms;	Signal transduction histidine kinase, nitrogen specific
+COG3901	K	 Transcription;	Regulator of nitric oxide reductase transcription
+COG3931	E	 Amino acid transport and metabolism;	Predicted N-formylglutamate amidohydrolase
+COG3938	E	 Amino acid transport and metabolism;	Proline racemase
+COG3968	E	 Amino acid transport and metabolism;	Glutamine synthetase type III
+COG3977	E	 Amino acid transport and metabolism;	Alanine-alpha-ketoisovalerate (or valine-pyruvate) aminotransferase
+COG4075	S	 Function unknown;	Uncharacterized protein, distantly related to nitrogen regulatory protein PII
+COG4091	E	 Amino acid transport and metabolism;	Predicted homoserine dehydrogenase, contains C-terminal SAF domain
+COG4126	E	 Amino acid transport and metabolism;	Asp/Glu/hydantoin racemase
+COG4160	E	 Amino acid transport and metabolism;	ABC-type arginine/histidine transport system, permease component
+COG4161	E	 Amino acid transport and metabolism;	ABC-type arginine transport system, ATPase component
+COG4166	E	 Amino acid transport and metabolism;	ABC-type oligopeptide transport system, periplasmic component
+COG4175	E	 Amino acid transport and metabolism;	ABC-type proline/glycine betaine transport system, ATPase component
+COG4176	E	 Amino acid transport and metabolism;	ABC-type proline/glycine betaine transport system, permease component
+COG4177	E	 Amino acid transport and metabolism;	ABC-type branched-chain amino acid transport system, permease component
+COG4187	E	 Amino acid transport and metabolism;	Arginine utilization protein RocB
+COG4215	E	 Amino acid transport and metabolism;	ABC-type arginine transport system, permease component
+COG4229	E	 Amino acid transport and metabolism;	Enolase-phosphatase E1 involved in merthionine salvage
+COG4230	E	 Amino acid transport and metabolism;	Delta 1-pyrroline-5-carboxylate dehydrogenase
+COG4263	P	 Inorganic ion transport and metabolism;	Nitrous oxide reductase
+COG4285	R	 General function prediction only;	Uncharacterized conserved protein , conains N-terminal glutamine amidotransferase (GATase1)-like domain
+COG4302	E	 Amino acid transport and metabolism;	Ethanolamine ammonia-lyase, small subunit
+COG4303	E	 Amino acid transport and metabolism;	Ethanolamine ammonia-lyase, large subunit
+COG4310	R	 General function prediction only;	Uncharacterized protein, cotains an aminopeptidase-like domain
+COG4311	E	 Amino acid transport and metabolism;	Sarcosine oxidase delta subunit
+COG4314	P	 Inorganic ion transport and metabolism;	Nitrous oxide reductase accessory protein NosL
+COG4324	R	 General function prediction only;	Predicted aminopeptidase
+COG4359	E	 Amino acid transport and metabolism;	2-hydroxy-3-keto-5-methylthiopentenyl-1-phosphate phosphatase (methionine salvage)
+COG4362	P	 Inorganic ion transport and metabolism;	Nitric oxide synthase, oxygenase domain
+COG4392	E	 Amino acid transport and metabolism;	Branched-chain amino acid transport protein
+COG4401	E	 Amino acid transport and metabolism;	Chorismate mutase
+COG4413	E	 Amino acid transport and metabolism;	Urea transporter
+COG4448	E	 Amino acid transport and metabolism;	L-asparaginase II
+COG4459	C	 Energy production and conversion;	Periplasmic nitrate reductase system, NapE component
+COG4548	P	 Inorganic ion transport and metabolism;	Nitric oxide reductase activation protein
+COG4576	QC	 Secondary metabolites biosynthesis, transport, and catabolism; Energy production and conversion;	Carboxysome shell and ethanolamine utilization microcompartment protein CcmK/EutM
+COG4577	QC	 Secondary metabolites biosynthesis, transport, and catabolism; Energy production and conversion;	Carboxysome shell and ethanolamine utilization microcompartment protein CcmL/EutN
+COG4583	E	 Amino acid transport and metabolism;	Sarcosine oxidase gamma subunit
+COG4597	E	 Amino acid transport and metabolism;	ABC-type amino acid transport system, permease component
+COG4598	E	 Amino acid transport and metabolism;	ABC-type histidine transport system, ATPase component
+COG4608	E	 Amino acid transport and metabolism;	ABC-type oligopeptide transport system, ATPase component
+COG4678	MX	 Cell wall/membrane/envelope biogenesis; Phage, viruses, transposases;	Muramidase (phage lambda lysozyme)
+COG4690	E	 Amino acid transport and metabolism;	Dipeptidase
+COG4766	E	 Amino acid transport and metabolism;	Ethanolamine utilization protein EutQ, cupin superfamily (function unknown)
+COG4810	E	 Amino acid transport and metabolism;	Ethanolamine utilization protein EutS, ethanolamine utilization microcompartment shell protein
+COG4812	E	 Amino acid transport and metabolism;	Ethanolamine utilization cobalamin adenosyltransferase
+COG4816	E	 Amino acid transport and metabolism;	Ethanolamine utilization protein EutL, ethanolamine utilization microcompartment shell protein
+COG4819	E	 Amino acid transport and metabolism;	Ethanolamine utilization protein EutA, possible chaperonin protecting lyase from inhibition
+COG4820	E	 Amino acid transport and metabolism;	Ethanolamine utilization protein EutJ, possible chaperonin
+COG4857	E	 Amino acid transport and metabolism;	5-Methylthioribose kinase, methionine salvage pathway
+COG4865	E	 Amino acid transport and metabolism;	Glutamate mutase epsilon subunit
+COG4882	R	 General function prediction only;	Predicted aminopeptidase, Iap family
+COG4917	E	 Amino acid transport and metabolism;	Ethanolamine utilization protein EutP, contains a P-loop NTPase domain
+COG4948	MR	 Cell wall/membrane/envelope biogenesis; General function prediction only;	L-alanine-DL-glutamate epimerase or related enzyme of enolase superfamily
+COG4977	K	 Transcription;	Transcriptional regulator GlxA family, contains an amidase domain and an AraC-type DNA-binding HTH domain
+COG4992	E	 Amino acid transport and metabolism;	Acetylornithine/succinyldiaminopimelate/putrescine aminotransferase
+COG4992	E	 Amino acid transport and metabolism;	Acetylornithine/succinyldiaminopimelate/putrescine aminotransferase
+COG5000	T	 Signal transduction mechanisms;	Signal transduction histidine kinase involved in nitrogen fixation and metabolism regulation
+COG5006	E	 Amino acid transport and metabolism;	Threonine/homoserine efflux transporter RhtA
+COG5013	CP	 Energy production and conversion; Inorganic ion transport and metabolism;	Nitrate reductase alpha subunit
+COG5206	O	 Post-translational modification, protein turnover, and chaperones;	Glycosylphosphatidylinositol transamidase (GPIT), subunit GPI8
+COG5279	D	 Cell cycle control, cell division, chromosome partitioning;	Cytokinesis protein 3, contains TGc (transglutaminase/protease-like) domain
+COG5456	P	 Inorganic ion transport and metabolism;	Nitrogen fixation protein FixH
+COG5554	Q	 Secondary metabolites biosynthesis, transport, and catabolism;	Nitrogen fixation protein
+COG5630	E	 Amino acid transport and metabolism;	Acetylglutamate synthase
+COG5632	M	 Cell wall/membrane/envelope biogenesis;	N-acetylmuramoyl-L-alanine amidase CwlA

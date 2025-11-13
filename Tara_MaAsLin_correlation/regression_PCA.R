@@ -22,7 +22,13 @@ coefs <- coefs[-1,] # remove row of zeros
 pca <- prcomp(coefs, scale = T, center = T)
 
 ggplot(pca$x, aes(PC1, PC2)) +
-  geom_point(alpha = 0.2)
+  geom_point(alpha = 0.2) + 
+  ggtitle("PCA of All Regression Coefficients")
 # womp womp
 
-screeplot(pca, type = "l", npcs = 21, main = "Screeplot of  PCs")
+ggsave("potential_figures/RegCoefs_PCA.jpg",
+       width = 6,
+       height = 4)
+
+#screeplot(pca, type = "l", npcs = 21, main = "Screeplot of  PCs")
+
